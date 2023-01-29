@@ -13,10 +13,25 @@
     <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
+    <a
+      href="index.html"
+      style="
+        background-color: brown;
+        margin: 15px;
+        display: inline-block;
+        padding: 4px;
+        color: white;
+      "
+      >To Home</a
+    >
+
     <!-- ❗️❗️❗️ Add partials like so for every page -->
     <include src="./partials/library-header.html"></include>
+    <include src="./partials/library-buttons.html"></include>
     <include src="./partials/feed.html"></include>
+    <include src="./partials/film-card.html"></include>
     <include src="./partials/footer.html"></include>
+    <include src="./partials/modal/film-modal.html"></include>
 
     <script type="module" src="./index.js"></script>
   </body>
