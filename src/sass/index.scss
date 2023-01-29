@@ -1,2 +1,18 @@
-@import './common';
-@import './example';
+// General styles
+
+@import './normalize';
+@import './variables';
+@import './breakpoints';
+@import './visually-hidden';
+@import './general';
+
+// Partials styles
+
+@import './home-header';
+@import './library-header';
+@import './feed';
+@import './footer';
+
+// Modal styles
+
+@import './modal/film-modal';

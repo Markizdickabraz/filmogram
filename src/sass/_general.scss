@@ -1,0 +1,84 @@
+body {
+  color: $black-font-color;
+  background-color: $white-bcg-color;
+  font-family: $primary-font;
+  font-size: $basic-font-size;
+  letter-spacing: 0.03em;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @media screen and (min-width: 480px) {
+    width: $mobile;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: $tablet;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: $desktop;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+
+  display: block;
+}
+
+address {
+  font-style: normal;
+}
+
+button {
+  display: block;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+}
+
+section {
+  @media screen and (max-width: 1199px) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding-top: 94px;
+    padding-bottom: 94px;
+  }
+}
+
+ul {
+  padding-left: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input {
+  padding: 0;
+  margin: 0;
+}
