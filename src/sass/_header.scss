@@ -4,6 +4,8 @@
   background-position: center;
   margin-left: auto;
   margin-right: auto;
+  background-color: $header-bg-color;
+
 
   @media screen and (max-width: 767px) {
     max-width: 480px;
@@ -58,6 +60,17 @@
     }
     @media screen and (min-width: 1280px) {
       background-image: url(../images/home/hom-bcg-img_l-@2x.png);
+    }
+  }
+  .header-library {
+    @media screen and (min-width: 480px) {
+      background-image: url(../images/library/lib-bcg-img_s-@2x.png);
+    }
+    @media screen and (min-width: 768px) {
+      background-image: url(../images/library/lib-bcg-img_m-@2x.png);
+    }
+    @media screen and (min-width: 1280px) {
+      background-image: url(../images/library/lib-bcg-img_l-@2x.png);
     }
   }
 }
