@@ -1,68 +1,59 @@
 .pagination-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
 
-    @media screen and (min-width: $mobile) and (max-width: $to-tablet) {
-        padding: 40px 0;
-    }
+  @media screen and (min-width: $mobile) and (max-width: $to-tablet) {
+    padding: 40px 0;
+  }
 
-    @media screen and (min-width: $tablet) {
-        padding: 50px 0 60px 0;
-    }
+  @media screen and (min-width: $tablet) {
+    padding: 50px 0 60px 0;
+  }
 }
 
 .pagin-btn:not(:last-child),
 .dots {
-    margin-right: 16px;
+  margin-right: 16px;
 }
 
 .pagin-btn {
-    padding: 0;
-    background-color: $white-font-color;
-    border: none;
-    color: $black-font-color;
-    cursor: pointer;
-    font-family: Roboto;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.333;
-   
+  padding: 0;
+  background-color: $white-font-color;
+  border: none;
+  color: $black-font-color;
+  cursor: pointer;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
 }
 
 .pagination--current {
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    background-color: $accent-bcg-color;
-    color: $white-font-color;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: $accent-bcg-color;
+  color: $white-font-color;
 }
 
 .dots,
 .first-btn,
 .last-btn {
-    @media screen and (max-width: $to-tablet) {
-        display: none;
-    }
+  @media screen and (max-width: $to-tablet) {
+    display: none;
+  }
 }
 
 .arrow-left,
 .arrow-right {
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    background-color: $grey-bcg-color;
-    transform: matrix(-1, 0, 0, 1, 0, 0);
-    stroke: #000;
-    background-position: center;
-    background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: $grey-bcg-color;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  stroke: #000;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
-// .arrow-left {
-//     background-image: url(../images/arrow-left.svg);
-// }
-
-// .arrow-right {
-//     background-image: url(../images/arrow-right.svg);
-// }
