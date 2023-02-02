@@ -5,8 +5,8 @@
   margin-left: auto;
   margin-right: auto;
 
-  @media screen and (min-width: 480px) {
-    width: 480px;
+  @media screen and (max-width: 767px) {
+    max-width: 480px;
     padding: 40px 20px 44px 20px;
     height: 230px;
   }
@@ -23,7 +23,7 @@
 }
 
 .header-home {
-  @media screen and (min-width: 480px) {
+  @media screen and (max-width: 767px) {
     background-image: url(../images/home/hom-bcg-img_s-@1x.png);
   }
   @media screen and (min-width: 768px) {
@@ -31,6 +31,18 @@
   }
   @media screen and (min-width: 1280px) {
     background-image: url(../images/home/hom-bcg-img_l-@1x.png);
+  }
+}
+
+.header-library {
+  @media screen and (max-width: 767px) {
+    background-image: url(../images/library/lib-bcg-img_s-@1x.png);
+  }
+  @media screen and (min-width: 768px) {
+    background-image: url(../images/library/lib-bcg-img_m-@1x.png);
+  }
+  @media screen and (min-width: 1280px) {
+    background-image: url(../images/library/lib-bcg-img_l-@1x.png);
   }
 }
 
@@ -79,20 +91,19 @@
   font-size: 12px;
   line-height: calc(14 / 12);
   letter-spacing: 0.02em;
-  color: white;
+  color: $white-font-color;
   text-decoration: none;
   transition-property: color;
-  transition-duration: 250ms;
-  //   transition-timing-function: $timing-function;
+  transition-timing-function: $primary-transition;
 
   &:hover,
   &:focus {
-    color: tomato;
+    color: $red-font-color;
   }
 
   &--active {
     @extend .header-nav__link;
-    color: white;
+    color: $white-font-color;
     &::after {
       content: '';
       position: absolute;
@@ -105,21 +116,21 @@
       transition-property: background-color;
       transition-duration: 250ms;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      background-color: tomato;
+      background-color: $red-font-color;
     }
   }
 }
 
 .logo {
   text-decoration: none;
-  color: white;
-  stroke: white;
+  color: $white-font-color;
+  stroke: $white-font-color;
   display: flex;
   align-items: center;
   &:hover,
   &:focus {
-    color: tomato;
-    stroke: tomato;
+    color: $red-font-color;
+    stroke: $red-font-color;
   }
 }
 
@@ -133,6 +144,9 @@
   font-weight: 500;
   font-size: 30px;
   line-height: calc(35 / 30);
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 }
 
 .search-button__icon {
