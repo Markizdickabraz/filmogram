@@ -10,11 +10,14 @@
 
 .films__list {
   padding-top: 20px;
+  height: 9200px;
+
   @media screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;
     margin-left: calc(-1 * 32px);
     margin-top: calc(-1 * 32px);
+    height: 5280px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -22,5 +25,6 @@
     flex-wrap: wrap;
     margin-left: calc(-1 * 16px);
     margin-top: calc(-1 * 32px);
+    height: 4682px;
   }
 }
