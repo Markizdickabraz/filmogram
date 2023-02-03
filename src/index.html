@@ -1,114 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HOME</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./sass/index.scss" />
-  </head>
 
-  <body>
-    <!-- ❗️❗️❗️ Add partials like so for every page -->
-    <include src="./partials/home-header.html"></include>
-    <!-- <include src="./partials/form-input.html"></include> -->
-    <include src="./partials/feed.html"></include>
-    <include src="./partials/film-card.html"></include>
-    <include src="./partials/pagination.html"></include>
-    <include src="./partials/footer.html"></include>
-    <!-- <include src="./partials/modal/dev-modal.html"></include> -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOME</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./sass/index.scss" />
+</head>
 
-    <div class="backdrop overlay data-modal isHidden">
-      <div class="film-modal " >
-        <!-- знопка закритя -->
-        <button class="film-modal__btn-icon-close" type="button">
-          <svg class="" width="" height=""></svg>
-        </button>
-        <!-- картинка -->
-        <div class="film-modal__thumb">
-          <img class="film-modal__img" alt="" />
-        </div>
-        <!-- інформаційний контейнер -->
-        <div class="film-modal__info-container">
-          <h2 class="film-modal__title">Film name</h2>
-          <table class="film-modal__table">
-            <tbody class="film-modal__cell1">
-              <tr>
-                <td class="film-modal__cell film-modal__modal-text">
-                  Vote / Votes
-                </td>
-                <td class="film-modal__cell film-modal__modal-text">
-                  <span class="film-modal__span film-modal__span-vote"
-                    >7.3</span
-                  >
-                  " / "
-                  <span class="film-modal__span film-modal__span--votes">
-                    167
-                  </span>
-                </td>
-              </tr>
+<body>
+  <!-- ❗️❗️❗️ Add partials like so for every page -->
+  <include src="./partials/home-header.html"></include>
+  <!-- <include src="./partials/form-input.html"></include> -->
+  <include src="./partials/feed.html"></include>
+  <include src="./partials/film-card.html"></include>
+  <include src="./partials/pagination.html"></include>
+  <include src="./partials/footer.html"></include>
+  <include src="./partials/modal/dev-modal.html"></include>
+  <include src="./partials/modal/film-modal.html"></include>
 
-              <tr>
-                <td class="film-modal__cell film-modal__modal-text">
-                  Popularity
-                </td>
-                <td class="film-modal__cell film-modal__modal-text">856.8</td>
-              </tr>
 
-              <tr>
-                <td class="film-modal__cell film-modal__modal-text">
-                  Oraginal Title
-                </td>
-                <td class="film-modal__cell film-modal__modal-text">
-                  <span>7.3</span> " / " <span> 167 </span>
-                </td>
-              </tr>
 
-              <tr>
-                <td class="film-modal__cell film-modal__modal-text">Genre</td>
-                <td class="film-modal__cell film-modal__modal-text">
-                  Action, Romance, Comedy
-                </td>
-              </tr>
-            </tbody>
-          </table>
+  <script type="module" src="./index.js"></script>
+</body>
 
-          <!-- Буде час сюди б я добавила кнопку запуску перегляду трейлера -->
-
-          <!-- опис фільму -->
-          <h3 class="film-modal__subtitle">ABOUT</h3>
-          <p class="fil-modal__text">Movie description</p>
-
-          <!-- кнопки -->
-          <ul class="film-modal__btn-list">
-            <li class="film-modal__btn-item">
-              <button
-                class="button button-modal-btn button-accent-btn"
-                type=""
-                data-action="watch"
-              >
-                ADD TO WATCHED
-              </button>
-            </li>
-            <li class="film-modal__btn-item">
-              <button
-                class="button button-modal-btn"
-                type=""
-                data-action="queue"
-              >
-                ADD TO QUEUE
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <script type="module" src="./index.js"></script>
-  </body>
 </html>
