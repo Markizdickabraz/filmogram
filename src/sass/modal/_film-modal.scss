@@ -1,0 +1,163 @@
+// .backdrop {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background: rgba(0, 0, 0, .2);
+//     z-index: 1000;
+//     opacity: 1;
+//     -webkit-transform: translateY(0%);
+//     transform: translateY(0%);
+//     visibility: visible;
+// }
+
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.film-modal {
+    position: absolute;
+    width: 806px;
+    height: 558px;
+    // left: 237px;
+    // top: 150px;
+    background: #ffffff;
+}
+
+.film-modal__btn-icon-close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    // left: 1005px;
+    // top: 158px;
+}
+
+.film-modal__thumb {
+    position: absolute;
+    width: 375px;
+    height: 478px;
+    // left: 249px;
+    // top: 190px;
+
+    // background: url(8.jpg);
+    border-radius: 5px;
+}
+
+.film-modal__img {
+    position: absolute;
+    width: 266px;
+    height: 31px;
+    // left: 640px;
+    // top: 190px;
+
+
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.16;
+
+    color: #000000;
+}
+
+.film-modal__info-container {
+    width: 391px;
+}
+
+.film-modal__title {
+    width: 266px;
+    height: 31px;
+    // left: 640px;
+    // top: 190px;
+
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.16;
+
+    color: #000000;
+}
+
+.film-modal__table {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 1.33;
+}
+
+// .film-modal__cell1 {}
+
+// .film-modal__cell {}
+
+.film-modal__modal-text {
+    color: #8C8C8C;
+}
+
+.film-modal__span {
+    width: 36px;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.film-modal__span-vote {
+    color: #FFFFFF;
+    background-color: #ff6b01;
+}
+
+.film-modal__span-votes {
+    color: #000;
+    background-color: #f7f7f7;
+}
+
+.film-modal__subtitle {
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-size: 12px;
+    line-height: 1.33333;
+    width: 65px;
+    height: 16px;
+}
+
+.fil-modal__text {
+    font-size: 12px;
+    line-height: 1.66667;
+}
+
+.film-modal__btn-list {
+    display: flex;
+
+}
+
+// .film-modal__btn-item {
+
+// }
+
+// .button {
+
+// }
+
+.button.button__accent-btn {
+    color: #fff;
+    background-color: #ff6b01;
+    border: none;
+}
+
+.button.button__modal-btn {
+    width: 110px;
+    height: 44px;
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    border-color: #000;
+    font-size: 12px;
+    line-height: 1.33333;
+}
