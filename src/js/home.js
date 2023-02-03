@@ -1,6 +1,6 @@
 import NewAskServer from './fetch-films';
 
-const gallery = document.querySelector('.cards__list');
+const gallery = document.querySelector('.films__list');
 console.log('gallery', gallery);
 const newAskServer = new NewAskServer();
 const STORAGE_KEY = 'genresId';
@@ -42,14 +42,33 @@ function renderMovieRatingPage(result) {
         }
       }
       return `
-            <li>
-             <img class="gallery__image" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
-             <p>${title}</p>
-             <p>${genreArr}</p>
-             <p>${release_date}</p>
-            </li>
+            <li class="films__card">
+  <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
+  <div class="films__desc">
+    <h3 class="films__title">${title}</h3>
+    <p class="films__genre">
+    ${genreArr.slice(0, 2).join(", ")}
+      <span>|</span>
+      ${release_date.slice(0, 4)}
+    </p>
+  </div>
+</li>
             `;
     })
     .join('');
   gallery.innerHTML = markup;
+}
+
+{
+  /* <li class="films__card">
+  <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
+  <div class="films__desc">
+    <h3 class="films__title">${title}</h3>
+    <p class="films__genre">
+    ${genreArr}
+      <span>|</span>
+      ${release_date}
+    </p>
+  </div>
+</li>; */
 }
