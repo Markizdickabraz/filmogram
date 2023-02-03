@@ -22,7 +22,7 @@
 }
 
 .film-modal {
-    position: absolute;
+    // position: absolute;
     width: 806px;
     height: 558px;
     // left: 237px;
@@ -160,4 +160,8 @@
     border-color: #000;
     font-size: 12px;
     line-height: 1.33333;
+}
+
+.isHidden {
+    display: none;
 }
