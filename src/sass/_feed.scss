@@ -1,0 +1,25 @@
+.films {
+    padding-top: 20px;
+    padding-bottom: 40px;
+
+    @media screen and (min-width: 768px) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    }
+}
+
+.films__list {
+    @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(-1*32px);
+    margin-top: calc(-1*32px);
+}
+
+    @media screen and (min-width: 1200px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(-1*16px);
+    margin-top: calc(-1*32px);
+}
+}
