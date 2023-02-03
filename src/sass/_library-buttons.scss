@@ -19,6 +19,9 @@
   color: $white-font-color;
   background-color: transparent;
   border-color: $white-bcg-color;
+  transition: border-color $primary-transition;
+  transition: background-color $primary-transition;
+  transition: box-shadow $primary-transition;
 
   @media screen and (max-width: 767px) {
     width: 130px;
@@ -38,8 +41,8 @@
   &:hover,
   &:focus {
     background-color: $accent-font-color;
-    border: none;
-    box-shadow: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
+    border-color: $accent-font-color;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
   }
 }
 
