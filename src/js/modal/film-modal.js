@@ -10,17 +10,27 @@ let filmArr = [];
 filmsList.addEventListener('click', modalOpen);
 
 function modalOpen(e) {
-    // if (e.target.className !== "films__card") {
-    //     return;
-    console.log(e.target);
-    toggleModal();
-    const getFilmsJson = localStorage.getItem(STORAGE_PAGE);
-    const parseFilmsJson = JSON.parse(getFilmsJson);
-    for (const film of parseFilmsJson) {
-        if (film.title === e.target.alt) {
-            filmArr.push(film);
-                const markupModal = filmArr.map(({ poster_path, vote_average, vote_count, title, popularity, genre_ids, overview }) => {
-                    return `
+  // if (e.target.className !== "films__card") {
+  //     return;
+  console.log(e.target);
+  toggleModal();
+  const getFilmsJson = localStorage.getItem(STORAGE_PAGE);
+  const parseFilmsJson = JSON.parse(getFilmsJson);
+  for (const film of parseFilmsJson) {
+    if (film.title === e.target.alt) {
+      filmArr.push(film);
+      const markupModal = filmArr
+        .map(
+          ({
+            poster_path,
+            vote_average,
+            vote_count,
+            title,
+            popularity,
+            genre_ids,
+            overview,
+          }) => {
+            return `
                             <div class="film-modal__thumb">
                                    <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}">
                                </div>
@@ -67,22 +77,22 @@ function modalOpen(e) {
                                    <button class="button button-modal-btn" type="" data-action="queue"> ADD TO QUEUE </button>
                                </li>
                            </ul>
-           `
-                }).join('');
-            modal.innerHTML = markupModal;
-
-            }
-
+           `;
+          }
+        )
+        .join('');
+      modal.innerHTML = markupModal;
     }
-    }
+  }
+}
 
 function toggleModal() {
-    backdrop.classList.toggle("isHidden");
+  backdrop.classList.toggle('isHidden');
 }
 
 backdrop.addEventListener('click', closeModal);
 
 function closeModal() {
-    toggleModal();
-    filmArr = [];
+  toggleModal();
+  filmArr = [];
 }

@@ -58,17 +58,3 @@ function renderMovieRatingPage(result) {
     .join('');
   gallery.innerHTML = markup;
 }
-
-{
-  /* <li class="films__card">
-  <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
-  <div class="films__desc">
-    <h3 class="films__title">${title}</h3>
-    <p class="films__genre">
-    ${genreArr}
-      <span>|</span>
-      ${release_date}
-    </p>
-  </div>
-</li>; */
-}
