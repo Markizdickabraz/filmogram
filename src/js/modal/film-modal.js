@@ -1,7 +1,7 @@
 const filmsList = document.querySelector('.films__list');
 const modal = document.querySelector('.renderModal');
-console.log(modal);
 const STORAGE_PAGE = 'storagePage';
+const STORAGE_KEY = 'genresId';
 const backdrop = document.querySelector('.backdrop');
 
 const IMGURL = `https://image.tmdb.org/t/p/w500/`;
@@ -13,15 +13,18 @@ function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //     return;
   CloseModalClickEsc();
-  console.dir(e.target);
   backdrop.classList.remove('isHidden');
   const getFilmsJson = localStorage.getItem(STORAGE_PAGE);
   const parseFilmsJson = JSON.parse(getFilmsJson);
-  for (const film of parseFilmsJson) {
-    if (film.title === e.target.alt
-      || film.title === e.target.textContent
-      || film.title === e.target.parentElement.children[0].textContent) {
-      filmArr.push(film);
+  for (let i = 0; i < parseFilmsJson.length; i += 1) {
+    parseFilmsJson[i]
+    if (parseFilmsJson[i].title === e.target.alt
+      || parseFilmsJson[i].title === e.target.textContent
+      || parseFilmsJson[i].title === e.target.parentElement.children[0].textContent) {
+      filmArr.push(parseFilmsJson[i]);
+      const getGenresJson = localStorage.getItem(STORAGE_KEY);
+      const parseGenresJson = JSON.parse(getGenresJson);
+
       const markupModal = filmArr
         .map(
           ({
@@ -33,6 +36,12 @@ function modalOpen(e) {
             genre_ids,
             overview,
           }) => {
+              let genreArr = [];
+      for (const genre of parseGenresJson) {
+        if (genre_ids.includes(genre.id)) {
+          genreArr.push(genre.name);
+        }
+      }
             return `
                             <div class="film-modal__thumb">
                                    <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}">
@@ -60,7 +69,7 @@ function modalOpen(e) {
                            
                                            <tr>
                                                <td class="film-modal__cell film-modal__modal-text"> Genre </td>
-                                               <td class="film-modal__cell film-modal__modal-text">${genre_ids}</td>
+                                               <td class="film-modal__cell film-modal__modal-text">${genreArr.slice(0, 2).join(", ")}</td>
                                            </tr>
                                        </tbody>
                                    </table>
@@ -92,7 +101,6 @@ function modalOpen(e) {
 backdrop.addEventListener('click', closeModal);
 
 function closeModal(e) {
-  console.dir(e.target);
   if (e.target.classList[0] !== 'backdrop') {
       return;
     }
