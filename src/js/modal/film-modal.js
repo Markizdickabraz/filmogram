@@ -42,54 +42,74 @@ function modalOpen(e) {
           genreArr.push(genre.name);
         }
       }
-            return `
-                            <div class="film-modal__thumb">
-                                   <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}">
-                               </div>
-                           <!-- інформаційний контейнер -->
-                               <div class="film-modal__info-container">
-                                   <h2 class="film-modal__title">${title}</h2>
-                                   <table class="film-modal__table">
-                                       <tbody class="film-modal__cell1">
-                                           <tr>
-                                               <td class="film-modal__cell film-modal__modal-text"> Vote / Votes </td>
-                                               <td class="film-modal__cell film-modal__modal-text"> 
-                                                   <span class="film-modal__span film-modal__span-vote">${vote_average}</span> " / " <span class="film-modal__span film-modal__span--votes">${vote_count}</span></td>
-                                           </tr>
-                           
-                                           <tr>
-                                               <td class="film-modal__cell film-modal__modal-text"> Popularity </td>
-                                               <td class="film-modal__cell film-modal__modal-text">${popularity} </td>
-                                           </tr>
-                           
-                                           <tr>
-                                               <td class="film-modal__cell film-modal__modal-text"> Oraginal Title </td>
-                                               <td class="film-modal__cell film-modal__modal-text"> <span>${title}</span></td>
-                                           </tr>
-                           
-                                           <tr>
-                                               <td class="film-modal__cell film-modal__modal-text"> Genre </td>
-                                               <td class="film-modal__cell film-modal__modal-text">${genreArr.slice(0, 2).join(", ")}</td>
-                                           </tr>
-                                       </tbody>
-                                   </table>
-                           
-                               <!-- Буде час сюди б я добавила кнопку запуску перегляду трейлера -->
-                           
-                           <!-- опис фільму -->
-                                   <h3 class="film-modal__subtitle"> ABOUT </h3>
-                                   <p class="fil-modal__text">${overview}</p>
-                           
-                           <!-- кнопки -->
-                           <ul class="film-modal__btn-list">
-                               <li class="film-modal__btn-item">
-                                   <button class="button button-modal-btn button-accent-btn" type="" data-action="watch"> ADD TO WATCHED </button>
-                               </li>
-                               <li class="film-modal__btn-item">
-                                   <button class="button button-modal-btn" type="" data-action="queue"> ADD TO QUEUE </button>
-                               </li>
-                           </ul>
-           `;
+            return `<div class="film-modal">
+  <button
+    class="film-modal__btn-icon"
+    data-modal-close-p
+    type="button"
+    id="btnClose"
+  >
+    <svg class="film-modal__btn-icon-close" width="20" height="20">
+      <use href="/src/images/icons.svg#icon-close"></use>
+    </svg>
+  </button>
+  <div class="film-modal__thumb">
+    <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}" />
+  </div>
+  <div class="film-modal__info-container">
+    <h2 class="film-modal__title">${title}</h2>
+    <table class="film-modal__table">
+      <tbody class="film-modal__cell1">
+        <tr>
+          <td class="film-modal__cell film-modal__modal-text">Vote / Votes</td>
+          <td class="film-modal__cell film-modal__modal-text">
+            <span class="film-modal__span film-modal__span-vote">${vote_average}</span>" / "
+            <span class="film-modal__span film-modal__span--votes">${vote_count}</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="film-modal__cell film-modal__modal-text">Popularity</td>
+          <td class="film-modal__cell film-modal__modal-text--popularity">
+            ${popularity}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="film-modal__cell film-modal__modal-text">
+            Oraginal Title
+          </td>
+          <td class="film-modal__cell film-modal__modal-text--oraginal">
+            ${title}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="film-modal__cell film-modal__modal-text">Genre</td>
+          <td class="film-modal__cell film-modal__modal-text--genre">
+            ${genre_ids}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="film-modal__subtitle">ABOUT</h3>
+    <p class="fil-modal__text">${overview}</p>
+
+    <ul class="film-modal__btn-list">
+      <li class="film-modal__btn-item">
+        <button class="btn modal__btn" type="" data-action="watch">
+          ADD TO WATCHED
+        </button>
+      </li>
+      <li class="film-modal__btn-item">
+        <button class=" btn modal__btn" type="" data-action="queue">
+          ADD TO QUEUE
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>`;
           }
         )
         .join('');
