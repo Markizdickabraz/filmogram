@@ -4,6 +4,8 @@ const gallery = document.querySelector('.films__list');
 console.log('gallery', gallery);
 const newAskServer = new NewAskServer();
 const STORAGE_KEY = 'genresId';
+const STORAGE_PAGE = 'storagePage';
+
 
 saveInLocalStorageGenresId();
 askServerByReting();
@@ -12,8 +14,10 @@ async function askServerByReting() {
   try {
     const data = await newAskServer.fetchMovieRating();
     const result = data.data.results;
+    localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
     console.log(result);
     renderMovieRatingPage(result);
+
   } catch (error) {
     console.log(error.message);
   }
