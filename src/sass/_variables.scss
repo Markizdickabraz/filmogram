@@ -7,7 +7,7 @@ $basic-font-size: 14px;
 // Font colors
 $white-font-color: #ffffff;
 $black-font-color: #000000;
-$grey-font-color1: #8C8C8C;
+$grey-font-color1: #8c8c8c;
 $grey-font-color2: #545454;
 $red-font-color: #ff001b;
 $accent-font-color: #ff6b01;
@@ -16,9 +16,15 @@ $accent-font-color: #ff6b01;
 $white-bcg-color: #ffffff;
 $grey-bcg-color: #f7f7f7;
 $accent-bcg-color: #ff6b08;
-$header-bg-color:  rgba(0, 0, 0, 0.56);
+$header-bg-color: rgba(0, 0, 0, 0.56);
 
 // Transitions
 $primary-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-
+@mixin transition(
+  $property,
+  $time: 250ms,
+  $timingFunction: cubic-bezier(0.4, 0, 0.2, 1)
+) {
+  transition: $property $time $timingFunction;
+}
