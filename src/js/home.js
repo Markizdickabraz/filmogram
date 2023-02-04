@@ -5,8 +5,8 @@ console.log('gallery', gallery);
 const newAskServer = new NewAskServer();
 const STORAGE_KEY = 'genresId';
 
-askServerByReting();
 saveInLocalStorageGenresId();
+askServerByReting();
 
 async function askServerByReting() {
   try {
@@ -34,7 +34,7 @@ function renderMovieRatingPage(result) {
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const markup = result
-    .map(({ poster_path, title, genre_ids, release_date }) => {
+    .map(({ poster_path, title, genre_ids, release_date}) => {
       let genreArr = [];
       for (const genre of parseGenresJson) {
         if (genre_ids.includes(genre.id)) {
@@ -43,7 +43,7 @@ function renderMovieRatingPage(result) {
       }
       return `
             <li class="films__card">
-  <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
+<img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
   <div class="films__desc">
     <h3 class="films__title">${title}</h3>
     <p class="films__genre">
