@@ -4,16 +4,17 @@
   left: 0;
   overflow: hidden;
   overflow-y: auto;
-   width: 100%;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  z-index: 3;
   opacity: 1;
   transform: translateY(0%);
   visibility: visible;
   transition: opacity 500ms linear, visibility 500ms linear,
     transform 500ms linear;
 }
+
 .backdrop.is-hidden {
   visibility: 0;
   opacity: none;
@@ -22,6 +23,7 @@
 }
 
 .film-modal {
+  z-index: 100;
   position: absolute;
   width: 80%;
   height: 80%;
@@ -123,6 +125,7 @@
 .film-modal__modal-text--genre {
   color: #000;
 }
+
 .film-modal__subtitle {
   text-transform: uppercase;
   margin-bottom: 8px;

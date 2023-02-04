@@ -12,12 +12,15 @@ filmsList.addEventListener('click', modalOpen);
 function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //     return;
-  console.log(e.target);
-  toggleModal();
+  CloseModalClickEsc();
+  console.dir(e.target);
+  backdrop.classList.remove('isHidden');
   const getFilmsJson = localStorage.getItem(STORAGE_PAGE);
   const parseFilmsJson = JSON.parse(getFilmsJson);
   for (const film of parseFilmsJson) {
-    if (film.title === e.target.alt) {
+    if (film.title === e.target.alt
+      || film.title === e.target.textContent
+      || film.title === e.target.parentElement.children[0].textContent) {
       filmArr.push(film);
       const markupModal = filmArr
         .map(
@@ -86,13 +89,25 @@ function modalOpen(e) {
   }
 }
 
-function toggleModal() {
-  backdrop.classList.toggle('isHidden');
-}
-
 backdrop.addEventListener('click', closeModal);
 
-function closeModal() {
-  toggleModal();
-  filmArr = [];
+function closeModal(e) {
+  console.dir(e.target);
+  if (e.target.classList[0] !== 'backdrop') {
+      return;
+    }
+    backdrop.classList.add('isHidden');
+    filmArr = [];
+  }
+
+
+function CloseModalClickEsc() {
+  document.addEventListener('keydown', event => {
+  
+  if (event.key !== 'Escape') {
+    return;
+  }
+    backdrop.classList.add('isHidden');
+    filmArr = [];
+})
 }

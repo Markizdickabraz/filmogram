@@ -23,6 +23,7 @@ body {
   background-color: black;
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
 }
 @media screen and (min-width: 1281px) {
   body {
@@ -282,13 +283,66 @@ input {
   }
 }
 
+.search-form {
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 767px) {
+  .search-form {
+    margin-top: 44px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .search-form {
+    margin-top: 30px;
+  }
+}
+
+.search-form__input {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+  outline: none;
+  padding-top: 10px;
+}
+@media screen and (max-width: 767px) {
+  .search-form__input {
+    width: 260px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .search-form__input {
+    width: 316px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .search-form__input {
+    width: 374px;
+  }
+}
+.search-form__input::-moz-placeholder {
+  color: #ffffff;
+}
+.search-form__input:-ms-input-placeholder {
+  color: #ffffff;
+}
+.search-form__input::placeholder {
+  color: #ffffff;
+}
+
 .search-button__icon {
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
 }
 
 .search-button {
+  width: 30px;
+  height: 30px;
   background-color: transparent;
+  border-bottom: 1px solid #ffffff;
+  border-radius: 0;
+  padding: 10px;
 }
 
 .btn {
@@ -526,6 +580,7 @@ input {
 
 .footer-title {
   text-align: center;
+  background-color: #f7f7f7;
 }
 @media screen and (min-width: 768px) {
   .footer-title {
@@ -548,6 +603,9 @@ input {
 .footer-title__link {
   text-decoration: underline;
   line-height: 16px;
+  border: none;
+  color: #545454;
+  background-color: #f7f7f7;
 }
 @media screen and (min-width: 768px) {
   .footer-title__link {
@@ -644,42 +702,75 @@ input {
   background-image: url(../images/arrow-left.svg);
 }
 
-.overlay {
-  position: absolute;
+.backdrop {
+  position: fixed;
   top: 0;
   left: 0;
+  overflow: hidden;
+  overflow-y: auto;
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  opacity: 1;
+  transform: translateY(0%);
+  visibility: visible;
+  transition: opacity 500ms linear, visibility 500ms linear, transform 500ms linear;
+}
+
+.backdrop.is-hidden {
+  visibility: 0;
+  opacity: none;
+  pointer-events: hidden;
+  transform: translateY(-100%);
 }
 
 .film-modal {
-  width: 806px;
-  height: 558px;
+  z-index: 100;
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  left: 237px;
+  top: 150px;
   background: #ffffff;
+  padding: 40px 16px 40px 12px;
+  display: flex;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.film-modal__btn-icon-close {
+.film-modal__btn-icon {
   position: absolute;
   width: 30px;
   height: 30px;
+  top: 8px;
+  right: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border: none;
+  background: #ffffff;
+  color: black;
+}
+
+.film-modal__btn-icon-close {
+  display: block;
+  fill: currentColor;
 }
 
 .film-modal__thumb {
-  position: absolute;
-  width: 375px;
-  height: 478px;
+  width: 380px;
+  height: 480px;
+  margin: auto;
   border-radius: 5px;
 }
 
-.film-modal__img {
-  position: absolute;
-  width: 266px;
-  height: 31px;
+.film-modal__thumb-img {
+  width: 370px;
+  height: 480px;
   font-weight: 500;
   font-size: 30px;
   line-height: 1.16;
@@ -691,8 +782,6 @@ input {
 }
 
 .film-modal__title {
-  width: 266px;
-  height: 31px;
   font-weight: 500;
   font-size: 30px;
   line-height: 1.16;
@@ -707,7 +796,7 @@ input {
 }
 
 .film-modal__modal-text {
-  color: #8C8C8C;
+  color: #8c8c8c;
 }
 
 .film-modal__span {
@@ -718,13 +807,19 @@ input {
 }
 
 .film-modal__span-vote {
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: #ff6b01;
 }
 
-.film-modal__span-votes {
+.film-modal__span--votes {
   color: #000;
   background-color: #f7f7f7;
+}
+
+.film-modal__modal-text--popularity,
+.film-modal__modal-text--oraginal,
+.film-modal__modal-text--genre {
+  color: #000;
 }
 
 .film-modal__subtitle {
@@ -739,19 +834,31 @@ input {
 .fil-modal__text {
   font-size: 12px;
   line-height: 1.66667;
+  margin-bottom: 20px;
 }
 
 .film-modal__btn-list {
   display: flex;
+  justify-content: space-around;
 }
 
-.button.button__accent-btn {
+.film-modal__btn-item {
+  margin: 15px;
+}
+
+.modal__btn {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.modal__btn.button__accent-btn {
   color: #fff;
   background-color: #ff6b01;
   border: none;
 }
 
-.button.button__modal-btn {
+.modal__btn.button__modal-btn {
   width: 110px;
   height: 44px;
   text-transform: uppercase;
@@ -764,4 +871,98 @@ input {
 
 .isHidden {
   display: none;
+}
+
+.basicLightbox {
+  overflow: scroll;
+}
+
+.team-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -20px;
+  width: 240px;
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+@media screen and (max-width: 767px) {
+  .team-wrapper {
+    margin-top: 70px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .team-wrapper {
+    width: 600px;
+    border-radius: 25px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .team-wrapper {
+    margin: -30px;
+    width: 800px;
+  }
+}
+
+.team-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  width: calc((100% - 80px) / 2);
+}
+@media screen and (min-width: 768px) {
+  .team-card {
+    width: calc((100% - 160px) / 4);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .team-card {
+    margin: 30px;
+    width: calc((100% - 240px) / 4);
+  }
+}
+
+.team-image {
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 5px 5px 11px -2px #000000;
+}
+
+.team-name {
+  margin-bottom: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+
+.team-role {
+  font-family: "Roboto", sans-serif;
+  color: #ff6b08;
+}
+@media screen and (max-width: 767px) {
+  .team-role {
+    font-size: 14px;
+  }
+}
+
+.team-git {
+  position: absolute;
+  top: 65px;
+  right: -10px;
+  transform: scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media screen and (min-width: 768px) {
+  .team-git {
+    top: 100px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .team-git {
+    top: 120px;
+  }
+}
+.team-git:hover, .team-git:focus {
+  transform: scale(1.5);
 }/*# sourceMappingURL=index.css.map */
