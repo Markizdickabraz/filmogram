@@ -17,6 +17,7 @@ function modalOpen(e) {
   backdrop.classList.remove('isHidden');
   const getFilmsJson = localStorage.getItem(STORAGE_PAGE);
   const parseFilmsJson = JSON.parse(getFilmsJson);
+  
   for (const film of parseFilmsJson) {
     if (film.title === e.target.alt
       || film.title === e.target.textContent
