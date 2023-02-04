@@ -24,6 +24,7 @@
 
 .footer-title {
   text-align: center;
+  background-color: $grey-bcg-color;
 
   @media screen and (min-width: $tablet) {
     display: flex;
@@ -42,6 +43,9 @@
 .footer-title__link {
   text-decoration: underline;
   line-height: 16px;
+  border: none;
+  color: $grey-font-color2;
+  background-color: $grey-bcg-color;
   @media screen and (min-width: $tablet) {
     line-height: 19px;
   }
