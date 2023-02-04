@@ -2,6 +2,7 @@ import NewAskServer from "./fetch-films";
 const seachServer = new NewAskServer();
 
 const STORAGE_KEY = 'genresId';
+const STORAGE_PAGE = 'storagePage';
 let currentRequest = ''; // for pagination
 
 const form = document.querySelector('.search-form');
@@ -22,16 +23,19 @@ async function formHandler(event) {
 
     if (response.length > 0) {
         currentRequest = request; // for pagination
-        drawGallery(response);
+        localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
+        drawGallery();
     } else {
         console.log('Search result not successful. Enter the correct movie name and try again.');
         // error message generation must be here
     }
 }
 
-function drawGallery(filmList) {
+function drawGallery() {
     const IMG_URL = `https://image.tmdb.org/t/p/w500/`;
     const allGenresArr = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    const filmList = JSON.parse(localStorage.getItem(STORAGE_PAGE));
+
     let markup = '';
 
     filmList.forEach(film => {
