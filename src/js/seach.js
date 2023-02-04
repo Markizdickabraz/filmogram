@@ -2,14 +2,15 @@ import NewAskServer from "./fetch-films";
 const seachServer = new NewAskServer();
 
 const STORAGE_KEY = 'genresId';
+let currentRequest = ''; // for pagination
 
-const searchButton = document.querySelector('.search-button');
+const form = document.querySelector('.search-form');
 const searchFormInput = document.querySelector('.search-form__input');
 const gallery = document.querySelector('.films__list');
 
-searchButton.addEventListener('click', seachButtonHandler);
+form.addEventListener('submit', formHandler);
 
-async function seachButtonHandler(event) {
+async function formHandler(event) {
     event.preventDefault();
 
     const request = searchFormInput.value.trim();
@@ -20,10 +21,11 @@ async function seachButtonHandler(event) {
     const response = await seachServer.fetchSearchId(request);
 
     if (response.length > 0) {
+        currentRequest = request; // for pagination
         drawGallery(response);
-        // request saving logick needed
     } else {
         console.log('Search result not successful. Enter the correct movie name and try again.');
+        // error message generation must be here
     }
 }
 
