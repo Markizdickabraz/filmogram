@@ -4,16 +4,29 @@ const seachServer = new NewAskServer();
 import drawGallery from "./seach.js";
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
+const STORAGE_PAGE_NUMBER = 'storagePageNumber';
+const STORAGE_CURRENT_REQUEST = 'currentRequest';
 
 // example
-async function foo() {
-  const response = await seachServer.fetchSearchId('dog');
+// async function foo() {
+//   const response = await seachServer.fetchSearchId('dog', 3);
+//   localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
+//   drawGallery();
+// }
+
+// foo();
+//
+
+async function goToPage(pageNumber) {
+  const request = localStorage.getItem(STORAGE_CURRENT_REQUEST);
+  const response = await seachServer.fetchSearchId('dog', pageNumber);
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
   drawGallery();
 }
 
-foo();
-//
+localStorage.setItem(STORAGE_CURRENT_REQUEST, 'dog');
+goToPage(1);
+
 
 const btn1Ref = document.querySelector('[data-index="1"]');
 const btn2Ref = document.querySelector('[data-index="2"]');
@@ -34,9 +47,15 @@ let currentPage = 1;
 
 let btns = document.querySelectorAll('.pagin-btn');
 
-prevDotsRef.hidden = true;
-leftArrowRef.hidden = true;
-firstPageRef.hidden = true;
+// prevDotsRef.style.display = "none";
+prevDotsRef.hidden = true;  // problems??
+leftArrowRef.hidden = true;  // problems??
+firstPageRef.hidden = true;  // problems??
+
+// prevDotsRef.style.display = "none";  // problems??
+// leftArrowRef.style.display = "none";  // problems??
+// firstPageRef.style.display = "none";  // problems??
+// firstPageRef.style.display = "inline";
 
 function onPaginationClick(event) {
   if (event.target.tagName === 'BUTTON') {

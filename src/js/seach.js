@@ -5,7 +5,10 @@ const seachServer = new NewAskServer();
 
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
-let currentRequest = ''; // for pagination 
+// let currentRequest = ''; // for pagination
+const STORAGE_PAGE_NUMBER = 'storagePageNumber';
+const STORAGE_CURRENT_REQUEST = 'currentRequest';
+
 
 const form = document.querySelector('.search-form');
 const searchFormInput = document.querySelector('.search-form__input');
@@ -15,7 +18,7 @@ form.addEventListener('submit', formHandler);
 
 async function formHandler(event) {
     event.preventDefault();
-    loader.spinner.show()
+    loader.spinner.show();
 
     const request = searchFormInput.value.trim();
     if (!request) {
@@ -25,13 +28,15 @@ async function formHandler(event) {
     const response = await seachServer.fetchSearchId(request);
 
     if (response.length > 0) {
-        currentRequest = request; // for pagination
+        // currentRequest = request; // for pagination
+        localStorage.setItem(STORAGE_CURRENT_REQUEST, request);
         localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
         drawGallery();
     } else {
         console.log('Search result not successful. Enter the correct movie name and try again.');
         // error message generation must be here
     }
+
     loader.spinner.close()
 }
 
@@ -40,7 +45,7 @@ export default function drawGallery() {
     const allGenresArr = JSON.parse(localStorage.getItem(STORAGE_KEY));
     const filmList = JSON.parse(localStorage.getItem(STORAGE_PAGE));
 
-    console.log('drG works!');
+    // console.log('drG works!');
 
     let markup = '';
 
