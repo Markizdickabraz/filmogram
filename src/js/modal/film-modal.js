@@ -3,6 +3,7 @@ const modal = document.querySelector('.renderModal');
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_KEY = 'genresId';
 const backdrop = document.querySelector('.backdrop');
+const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
 
 const IMGURL = `https://image.tmdb.org/t/p/w500/`;
 let filmArr = [];
@@ -54,7 +55,7 @@ function modalOpen(e) {
     </svg>
   </button>
   <div class="film-modal__thumb">
-    <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}" />
+    <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}" onerror="this.onerror=null; this.src='${notFound}';"/>
   </div>
   <div class="film-modal__info-container">
     <h2 class="film-modal__title">${title}</h2>

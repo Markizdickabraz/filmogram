@@ -33,6 +33,7 @@ async function formHandler(event) {
 
 function drawGallery() {
     const IMG_URL = `https://image.tmdb.org/t/p/w500/`;
+    const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
     const allGenresArr = JSON.parse(localStorage.getItem(STORAGE_KEY));
     const filmList = JSON.parse(localStorage.getItem(STORAGE_PAGE));
 
@@ -48,7 +49,7 @@ function drawGallery() {
 
         markup = markup + `
         <li class="films__card">
-            <img class="films__img" src="${IMG_URL}${film.poster_path}" alt="${film.title}" loading="lazy" />
+            <img class="films__img" src="${IMG_URL}${film.poster_path}" alt="${film.title}" loading="lazy" onerror="this.onerror=null; this.src='${notFound}';"/>
             <div class="films__desc">
                 <h3 class="films__title">${film.title}</h3>
                 <p class="films__genre">
