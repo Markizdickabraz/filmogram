@@ -25,7 +25,7 @@ async function goToPage(pageNumber) {
 }
 
 localStorage.setItem(STORAGE_CURRENT_REQUEST, 'dog');
-goToPage(1);
+// goToPage(1);
 
 
 const btn1Ref = document.querySelector('[data-index="1"]');
@@ -43,14 +43,14 @@ const afterDotsRef = document.querySelector('#after');
 
 paginationRef.addEventListener('click', onPaginationClick);
 
-let currentPage = 1;
+let currentPage = 1;  // necessary? // storage is better
 
 let btns = document.querySelectorAll('.pagin-btn');
 
 // prevDotsRef.style.display = "none";
-prevDotsRef.hidden = true;  // problems??
-leftArrowRef.hidden = true;  // problems??
-firstPageRef.hidden = true;  // problems??
+prevDotsRef.hidden = true;  // problems?? no
+leftArrowRef.hidden = true;  // problems?? yes
+firstPageRef.hidden = true;  // problems?? yes
 
 // prevDotsRef.style.display = "none";  // problems??
 // leftArrowRef.style.display = "none";  // problems??
@@ -137,7 +137,8 @@ function onPaginationClick(event) {
       lastPageRef.hidden = false;
     }
 
-    gallery.innerHTML = '';
+    // gallery.innerHTML = '';
+    goToPage(currentPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
    
   }
