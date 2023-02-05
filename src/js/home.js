@@ -1,4 +1,5 @@
 import NewAskServer from './fetch-films';
+import loader from './spinner'
 
 const gallery = document.querySelector('.films__list');
 console.log('gallery', gallery);
@@ -12,11 +13,13 @@ askServerByReting();
 
 async function askServerByReting() {
   try {
+    loader.spinner.show()
     const data = await newAskServer.fetchMovieRating();
     const result = data.data.results;
     localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
     console.log(result);
     renderMovieRatingPage(result);
+    loader.spinner.close()
 
   } catch (error) {
     console.log(error.message);

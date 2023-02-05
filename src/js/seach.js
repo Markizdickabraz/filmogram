@@ -1,4 +1,6 @@
 import NewAskServer from "./fetch-films";
+import loader from './spinner';
+
 const seachServer = new NewAskServer();
 
 const STORAGE_KEY = 'genresId';
@@ -13,6 +15,7 @@ form.addEventListener('submit', formHandler);
 
 async function formHandler(event) {
     event.preventDefault();
+    loader.spinner.show()
 
     const request = searchFormInput.value.trim();
     if (!request) {
@@ -29,6 +32,7 @@ async function formHandler(event) {
         console.log('Search result not successful. Enter the correct movie name and try again.');
         // error message generation must be here
     }
+    loader.spinner.close()
 }
 
 function drawGallery() {
