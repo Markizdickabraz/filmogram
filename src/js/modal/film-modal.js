@@ -63,7 +63,7 @@ function modalOpen(e) {
         <tr>
           <td class="film-modal__cell film-modal__modal-text">Vote / Votes</td>
           <td class="film-modal__cell film-modal__modal-text">
-            <span class="film-modal__span film-modal__span-vote">${vote_average}</span> /
+            <span class="film-modal__span film-modal__span-vote">${vote_average.toFixed(1)}</span> /
             <span class="film-modal__span film-modal__span--votes">${vote_count}</span>
           </td>
         </tr>
@@ -87,7 +87,7 @@ function modalOpen(e) {
         <tr>
           <td class="film-modal__cell film-modal__modal-text">Genre</td>
           <td class="film-modal__cell film-modal__modal-text--genre">
-            ${genre_ids}
+            ${genreArr.join(", ")}
           </td>
         </tr>
       </tbody>
