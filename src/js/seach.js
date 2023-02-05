@@ -1,4 +1,6 @@
 import NewAskServer from "./fetch-films";
+import loader from './spinner';
+
 const seachServer = new NewAskServer();
 
 const STORAGE_KEY = 'genresId';
@@ -13,6 +15,7 @@ form.addEventListener('submit', formHandler);
 
 async function formHandler(event) {
     event.preventDefault();
+    loader.spinner.show()
 
     const request = searchFormInput.value.trim();
     if (!request) {
@@ -29,6 +32,7 @@ async function formHandler(event) {
         console.log('Search result not successful. Enter the correct movie name and try again.');
         // error message generation must be here
     }
+    loader.spinner.close()
 }
 
 function drawGallery() {
@@ -39,11 +43,11 @@ function drawGallery() {
     let markup = '';
 
     filmList.forEach(film => {
-        let genres = '';
+        let genres = [];
 
         film.genre_ids.forEach(genreId => {
             const currentGenre = allGenresArr.filter(elem => elem.id === genreId);
-            genres = genres + currentGenre[0].name + ', ';
+            genres.push(currentGenre[0].name);
         })
 
         markup = markup + `
@@ -52,7 +56,7 @@ function drawGallery() {
             <div class="films__desc">
                 <h3 class="films__title">${film.title}</h3>
                 <p class="films__genre">
-                    ${genres.slice(0, genres.length-2)}
+                    ${genres.slice(0, 2).join(", ")}
                     <span>|</span>
                     ${film.release_date.slice(0, 4)}
                 </p>
