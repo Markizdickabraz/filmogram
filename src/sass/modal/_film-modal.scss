@@ -25,6 +25,11 @@
   transform: translateY(-100%);
 }
 
+// .renderModal {
+// display: flex;
+// position: relative;
+// }
+
 .film-modal {
   position: absolute;
   left: 237px;
@@ -61,23 +66,30 @@
 }
 
 .film-modal__btn-icon {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 8px;
-  right: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: none;
-  background: #ffffff;
-  color: black;
+  // position: absolute;
+  // width: 30px;
+  // height: 30px;
+  // top: 8px;
+  // right: 8px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // cursor: pointer;
+  // border: none;
+  // background: white;
+  // color: black;
+background-image: url(/src/images/close.svg);
+background-position: center;
+background-repeat: no-repeat;
+top: 8px;
+right: 8px;
+position: absolute;
+
 }
 
 .film-modal__btn-icon-close {
   display: block;
-  fill: currentColor;
+  fill: currentColor; 
 }
 
 .film-modal__thumb {
@@ -180,12 +192,28 @@
 }
 
 .fil-modal__text {
+  @media screen and (max-width: 767px) {
+    max-height: 240px;
+    overflow: auto;
+  }
+
+    @media screen and (min-width: 768px) {
+      max-height: 264px;
+      overflow: auto;
+    }
+
+         @media screen and (min-width: 1280px) {
+          max-height: 391px;
+          overflow: auto;
+         }
+
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 20px;
   /* or 167% */
+  margin-bottom: 20px;
 
   color: #000000;
 }
@@ -206,8 +234,18 @@
 
   @media screen and (min-width: 320px) and (max-width: 767px) {
     width: 110px;
-    height: 60px;
+    height: 44px;
   }
+
+    // @media screen and (min-width: 768px) {
+    //   width: 125px;
+    //   height: 44px;
+    // }
+
+    //     @media screen and (min-width: 1280px) {
+    //       width: 136px;
+    //       height: 44px;
+    //     }
 }
 
 .modal__btn.button__accent-btn {
