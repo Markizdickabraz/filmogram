@@ -1,4 +1,20 @@
 
+import NewAskServer from "./fetch-films";
+const seachServer = new NewAskServer();
+import drawGallery from "./seach.js";
+const STORAGE_KEY = 'genresId';
+const STORAGE_PAGE = 'storagePage';
+
+// example
+async function foo() {
+  const response = await seachServer.fetchSearchId('dog');
+  localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
+  drawGallery();
+}
+
+foo();
+//
+
 const btn1Ref = document.querySelector('[data-index="1"]');
 const btn2Ref = document.querySelector('[data-index="2"]');
 const btn3Ref = document.querySelector('[data-index="3"]');

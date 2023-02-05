@@ -5,7 +5,7 @@ const seachServer = new NewAskServer();
 
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
-let currentRequest = ''; // for pagination
+let currentRequest = ''; // for pagination 
 
 const form = document.querySelector('.search-form');
 const searchFormInput = document.querySelector('.search-form__input');
@@ -35,10 +35,12 @@ async function formHandler(event) {
     loader.spinner.close()
 }
 
-function drawGallery() {
+export default function drawGallery() {
     const IMG_URL = `https://image.tmdb.org/t/p/w500/`;
     const allGenresArr = JSON.parse(localStorage.getItem(STORAGE_KEY));
     const filmList = JSON.parse(localStorage.getItem(STORAGE_PAGE));
+
+    console.log('drG works!');
 
     let markup = '';
 
