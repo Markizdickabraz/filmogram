@@ -6,13 +6,14 @@ const seachServer = new NewAskServer();
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
 // let currentRequest = ''; // for pagination
-const STORAGE_PAGE_NUMBER = 'storagePageNumber';
+// const STORAGE_PAGE_NUMBER = 'storagePageNumber';
 const STORAGE_CURRENT_REQUEST = 'currentRequest';
 
 
 const form = document.querySelector('.search-form');
 const searchFormInput = document.querySelector('.search-form__input');
 const gallery = document.querySelector('.films__list');
+const paginationRef = document.querySelector('.pagination-container');
 
 form.addEventListener('submit', formHandler);
 
@@ -31,6 +32,8 @@ async function formHandler(event) {
         // currentRequest = request; // for pagination
         localStorage.setItem(STORAGE_CURRENT_REQUEST, request);
         localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
+        let paginationReset = new Event("reset");
+        paginationRef.dispatchEvent(paginationReset);
         drawGallery();
     } else {
         console.log('Search result not successful. Enter the correct movie name and try again.');

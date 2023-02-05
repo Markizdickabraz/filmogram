@@ -4,7 +4,7 @@ const seachServer = new NewAskServer();
 import drawGallery from "./seach.js";
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
-const STORAGE_PAGE_NUMBER = 'storagePageNumber';
+// const STORAGE_PAGE_NUMBER = 'storagePageNumber';
 const STORAGE_CURRENT_REQUEST = 'currentRequest';
 
 // example
@@ -19,12 +19,12 @@ const STORAGE_CURRENT_REQUEST = 'currentRequest';
 
 async function goToPage(pageNumber) {
   const request = localStorage.getItem(STORAGE_CURRENT_REQUEST);
-  const response = await seachServer.fetchSearchId('dog', pageNumber);
+  const response = await seachServer.fetchSearchId(request, pageNumber);
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
   drawGallery();
 }
 
-localStorage.setItem(STORAGE_CURRENT_REQUEST, 'dog');
+// localStorage.setItem(STORAGE_CURRENT_REQUEST, 'dog');
 // goToPage(1);
 
 
@@ -42,6 +42,11 @@ const prevDotsRef = document.querySelector('#previous');
 const afterDotsRef = document.querySelector('#after');
 
 paginationRef.addEventListener('click', onPaginationClick);
+paginationRef.addEventListener('reset', paginationReset);
+
+
+
+//
 
 let currentPage = 1;  // necessary? // storage is better
 
@@ -140,8 +145,22 @@ function onPaginationClick(event) {
     // gallery.innerHTML = '';
     goToPage(currentPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-   
   }
+}
+
+function paginationReset(event) {
+  // console.log('MuHA-HA!!!');
+  btns.forEach(el => el.classList.remove('pagination--current'));
+  btn1Ref.textContent = 1;
+  btn2Ref.textContent = 2;
+  btn3Ref.textContent = 3;
+  btn4Ref.textContent = 4;
+  btn5Ref.textContent = 5;
+  btn1Ref.classList.add('pagination--current');
+  currentPage = btn1Ref.textContent;
+  leftArrowRef.hidden = true;
+  prevDotsRef.hidden = true;
+  firstPageRef.hidden = true;
 }
 
 let pageSize = 9;
@@ -156,7 +175,5 @@ function defineResultsPerPage() {
   }
   return pageSize;
 }
-
-
 
 export { currentPage, defineResultsPerPage };
