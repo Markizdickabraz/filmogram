@@ -18,10 +18,12 @@ function modalOpen(e) {
   const getFilmsJson = localStorage.getItem(STORAGE_PAGE);
   const parseFilmsJson = JSON.parse(getFilmsJson);
   for (let i = 0; i < parseFilmsJson.length; i += 1) {
-    parseFilmsJson[i]
-    if (parseFilmsJson[i].title === e.target.alt
-      || parseFilmsJson[i].title === e.target.textContent
-      || parseFilmsJson[i].title === e.target.parentElement.children[0].textContent) {
+    parseFilmsJson[i];
+    if (
+      parseFilmsJson[i].title === e.target.alt ||
+      parseFilmsJson[i].title === e.target.textContent ||
+      parseFilmsJson[i].title === e.target.parentElement.children[0].textContent
+    ) {
       filmArr.push(parseFilmsJson[i]);
       const getGenresJson = localStorage.getItem(STORAGE_KEY);
       const parseGenresJson = JSON.parse(getGenresJson);
@@ -37,12 +39,12 @@ function modalOpen(e) {
             genre_ids,
             overview,
           }) => {
-              let genreArr = [];
-      for (const genre of parseGenresJson) {
-        if (genre_ids.includes(genre.id)) {
-          genreArr.push(genre.name);
-        }
-      }
+            let genreArr = [];
+            for (const genre of parseGenresJson) {
+              if (genre_ids.includes(genre.id)) {
+                genreArr.push(genre.name);
+              }
+            }
             return `<div class="film-modal">
   <button
     class="film-modal__btn-icon"
@@ -50,9 +52,6 @@ function modalOpen(e) {
     type="button"
     id="btnClose"
   >
-    <svg class="film-modal__btn-icon-close" width="20" height="20">
-      <use href="/src/images/icons.svg#icon-close"></use>
-    </svg>
   </button>
   <div class="film-modal__thumb">
     <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}" onerror="this.onerror=null; this.src='${notFound}';"/>
@@ -64,7 +63,9 @@ function modalOpen(e) {
         <tr>
           <td class="film-modal__cell film-modal__modal-text">Vote / Votes</td>
           <td class="film-modal__cell film-modal__modal-text">
-            <span class="film-modal__span film-modal__span-vote">${vote_average.toFixed(1)}</span> /
+            <span class="film-modal__span film-modal__span-vote">${vote_average.toFixed(
+              1
+            )}</span> /
             <span class="film-modal__span film-modal__span--votes">${vote_count}</span>
           </td>
         </tr>
@@ -88,7 +89,7 @@ function modalOpen(e) {
         <tr>
           <td class="film-modal__cell film-modal__modal-text">Genre</td>
           <td class="film-modal__cell film-modal__modal-text--genre">
-            ${genreArr.join(", ")}
+            ${genreArr.join(', ')}
           </td>
         </tr>
       </tbody>
@@ -115,6 +116,10 @@ function modalOpen(e) {
         )
         .join('');
       modal.innerHTML = markupModal;
+      const closeBtn = document.querySelector('#btnClose');
+      console.log('closeBtn: ', closeBtn);
+
+      closeBtn.addEventListener('click', onCloseBtnClick);
     }
   }
 }
@@ -123,20 +128,23 @@ backdrop.addEventListener('click', closeModal);
 
 function closeModal(e) {
   if (e.target.classList[0] !== 'backdrop') {
+    return;
+  }
+  backdrop.classList.add('isHidden');
+  filmArr = [];
+}
+
+function CloseModalClickEsc() {
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') {
       return;
     }
     backdrop.classList.add('isHidden');
     filmArr = [];
-  }
+  });
+}
 
-
-function CloseModalClickEsc() {
-  document.addEventListener('keydown', event => {
-  
-  if (event.key !== 'Escape') {
-    return;
-  }
-    backdrop.classList.add('isHidden');
-    filmArr = [];
-})
+function onCloseBtnClick(e) {
+  backdrop.classList.add('isHidden');
+  filmArr = [];
 }
