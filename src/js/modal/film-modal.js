@@ -127,6 +127,7 @@ backdrop.addEventListener('click', closeModal);
 
 function closeModal(e) {
   if (e.target.classList[0] !== 'backdrop') {
+
     return;
   }
   backdrop.classList.add('isHidden');
@@ -140,6 +141,7 @@ function CloseModalClickEsc() {
     }
     backdrop.classList.add('isHidden');
     filmArr = [];
+
   });
 }
 
@@ -147,3 +149,4 @@ function onCloseBtnClick(e) {
   backdrop.classList.add('isHidden');
   filmArr = [];
 }
+
