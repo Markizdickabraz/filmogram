@@ -7,19 +7,22 @@ console.log(header);
 
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
-let currentRequest = ''; // for pagination
+const STORAGE_CURRENT_REQUEST = 'currentRequest';
 
 const form = document.querySelector('.search-form');
 const searchFormInput = document.querySelector('.search-form__input');
 const gallery = document.querySelector('.films__list');
+
+const paginationRef = document.querySelector('.pagination-container');
 const badRequest = document.querySelector('.bad-request')
+
 
 form.addEventListener('submit', formHandler);
 
 async function formHandler(event) {
+
   event.preventDefault();
   badRequest.innerHTML = ""
-  
 
   const request = searchFormInput.value.trim();
   if (!request) {
@@ -37,15 +40,11 @@ async function formHandler(event) {
   } else {
     loader.spinner.close();
     badRequest.innerHTML = 'Search result not successful. Enter the correct movie name and try again.';
-    console.log(
-      'Search result not successful. Enter the correct movie name and try again.'
-    );
-    // error message generation must be here
   }
   loader.spinner.close();
 }
 
-function drawGallery() {
+export default function drawGallery() {
     const IMG_URL = `https://image.tmdb.org/t/p/w500/`;
     const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
     const allGenresArr = JSON.parse(localStorage.getItem(STORAGE_KEY));
