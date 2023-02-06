@@ -23,7 +23,7 @@ padding-top: 10px;
     width: 316px;
   }
   @media screen and (min-width: 1280px) {
-    width: 374px;
+    width: 364px;
   }
   &::placeholder {
     color: $white-font-color;
@@ -42,4 +42,20 @@ padding-top: 10px;
   border-bottom: 1px solid $white-font-color;
   border-radius: 0;
   padding: 10px;
+};
+
+.bad-request{
+  color: $red-font-color;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16px;
+  
+  @media screen and (max-width: $to-tablet) {
+    width: 280px;
+  }
+  @media screen and (min-width: $tablet) {
+    width: 393px;
+    margin-top: 20px;
+  }
 }
