@@ -28,7 +28,6 @@ async function formHandler(event) {
   const response = await seachServer.fetchSearchId(request);
 
   if (response.length > 0) {
-    // currentRequest = request; // for pagination
     localStorage.setItem(STORAGE_CURRENT_REQUEST, request);
     localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
     let paginationReset = new Event('reset');
@@ -40,7 +39,6 @@ async function formHandler(event) {
     console.log(
       'Search result not successful. Enter the correct movie name and try again.'
     );
-    // error message generation must be here
   }
 
   loader.spinner.close();

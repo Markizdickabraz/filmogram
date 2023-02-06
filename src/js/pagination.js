@@ -34,7 +34,6 @@ let currentPage = 1;
 
 let btns = document.querySelectorAll('.pagin-btn');
 
-
 prevDotsRef.style.display = "none";  
 leftArrowRef.style.display = "none";  
 firstPageRef.style.display = "none";  
@@ -162,6 +161,14 @@ function checkPaginationStart() {
 }
 
 function paginationReset(event) {
+  afterDotsRef.style.display = "inline";
+  rightArrowRef.style.display = "inline";
+  lastPageRef.style.display = "inline";
+  btn2Ref.style.display = "inline";
+  btn3Ref.style.display = "inline";
+  btn4Ref.style.display = "inline";
+  btn5Ref.style.display = "inline";
+
   btns.forEach(el => el.classList.remove('pagination--current'));
   btn1Ref.textContent = 1;
   btn2Ref.textContent = 2;
@@ -175,6 +182,29 @@ function paginationReset(event) {
   firstPageRef.style.display = "none";
   const totalPages = Number(localStorage.getItem(STORAGE_TOTAL_PAGES));
   lastPageRef.textContent = totalPages;
+  if (totalPages < 7) {
+    shortenButtonList(totalPages);
+  }
+}
+
+function shortenButtonList(totalPages) {
+  afterDotsRef.style.display = "none";
+  rightArrowRef.style.display = "none";
+  if (totalPages < 6) {
+    lastPageRef.style.display = "none";
+  }
+  if (totalPages < 5) {
+    btn5Ref.style.display = "none";
+  }
+  if (totalPages < 4) {
+    btn4Ref.style.display = "none";
+  }
+  if (totalPages < 3) {
+    btn3Ref.style.display = "none";
+  }
+  if (totalPages < 2) {
+    btn2Ref.style.display = "none";
+  }
 }
 
 let pageSize = 9;
