@@ -4,19 +4,8 @@ const seachServer = new NewAskServer();
 import drawGallery from "./seach.js";
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
-// const STORAGE_PAGE_NUMBER = 'storagePageNumber';
 const STORAGE_CURRENT_REQUEST = 'currentRequest';
 const STORAGE_TOTAL_PAGES = 'totalPages';
-
-// example
-// async function foo() {
-//   const response = await seachServer.fetchSearchId('dog', 3);
-//   localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
-//   drawGallery();
-// }
-
-// foo();
-//
 
 async function goToPage(pageNumber) {
   const request = localStorage.getItem(STORAGE_CURRENT_REQUEST);
@@ -24,10 +13,6 @@ async function goToPage(pageNumber) {
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
   drawGallery();
 }
-
-// localStorage.setItem(STORAGE_CURRENT_REQUEST, 'dog');
-// goToPage(1);
-
 
 const btn1Ref = document.querySelector('[data-index="1"]');
 const btn2Ref = document.querySelector('[data-index="2"]');
@@ -45,33 +30,17 @@ const afterDotsRef = document.querySelector('#after');
 paginationRef.addEventListener('click', onPaginationClick);
 paginationRef.addEventListener('reset', paginationReset);
 
-
-
-//
-
-let currentPage = 1;  // necessary? // storage is better
+let currentPage = 1;
 
 let btns = document.querySelectorAll('.pagin-btn');
 
-// prevDotsRef.style.display = "none";
-prevDotsRef.style.display = "none";  // problems?? no
-leftArrowRef.style.display = "none";  // problems?? yes
-firstPageRef.style.display = "none";  // problems?? yes
 
-// prevDotsRef.style.display = "none";  // problems??
-// leftArrowRef.style.display = "none";  // problems??
-// firstPageRef.style.display = "none";  // problems??
-// firstPageRef.style.display = "inline";
-
-// rightArrowRef.style.display = "none";
-// afterDotsRef.style.display = "none";
-
-
-
+prevDotsRef.style.display = "none";  
+leftArrowRef.style.display = "none";  
+firstPageRef.style.display = "none";  
 
 function onPaginationClick(event) {
   if (event.target.tagName === 'BUTTON') {
-    // const totalPagesStr = localStorage.getItem(STORAGE_TOTAL_PAGES);
     let totalPages = Number(localStorage.getItem(STORAGE_TOTAL_PAGES));
     lastPageRef.textContent = totalPages;
     
@@ -108,6 +77,7 @@ function onPaginationClick(event) {
       btn5Ref.textContent = Number(btn5Ref.textContent) - 5;
       btn5Ref.classList.add('pagination--current');
       currentPage = btn5Ref.textContent;
+      checkPaginationStart();
     }
 
     if (event.target.classList.contains('first-btn')) {
@@ -154,7 +124,6 @@ function onPaginationClick(event) {
       lastPageRef.style.display = "inline";
     }
 
-    // gallery.innerHTML = '';
     goToPage(currentPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -162,20 +131,6 @@ function onPaginationClick(event) {
 
 function checkPaginationEnd(totalPages) {
   if ((totalPages - Number(currentPage)) < 5) {
-    // rightArrowRef.style.display = "none";
-    // afterDotsRef.style.display = "none";
-
-    // btn1Ref.textContent = totalPages - 5;
-    // btn2Ref.textContent = totalPages - 4;
-    // btn3Ref.textContent = totalPages - 3;
-    // btn4Ref.textContent = totalPages - 2;
-    // btn5Ref.textContent = totalPages - 1;
-    // currentPage = btn1Ref.textContent;
-    // rightArrowRef.style.display = "none";
-    // afterDotsRef.style.display = "none";
-
-    // rightArrowRef.style.display = "none";
-    // afterDotsRef.style.display = "none";
     btns.forEach(el => el.classList.remove('pagination--current'));
     btn1Ref.textContent = Number(lastPageRef.textContent) - 4;
     btn2Ref.textContent = Number(lastPageRef.textContent) - 3;
@@ -190,8 +145,23 @@ function checkPaginationEnd(totalPages) {
   }
 }
 
+function checkPaginationStart() {
+  if (Number(btn1Ref.textContent) < 1) {
+    btns.forEach(el => el.classList.remove('pagination--current'));
+    btn1Ref.textContent = 1;
+    btn2Ref.textContent = 2;
+    btn3Ref.textContent = 3;
+    btn4Ref.textContent = 4;
+    btn5Ref.textContent = 5;
+    btn1Ref.classList.add('pagination--current');
+    currentPage = btn5Ref.textContent;
+    leftArrowRef.style.display = "none";
+    prevDotsRef.style.display = "none";
+    firstPageRef.style.display = "none";
+  }
+}
+
 function paginationReset(event) {
-  // console.log('MuHA-HA!!!');
   btns.forEach(el => el.classList.remove('pagination--current'));
   btn1Ref.textContent = 1;
   btn2Ref.textContent = 2;
