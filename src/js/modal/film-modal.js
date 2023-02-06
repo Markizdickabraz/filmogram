@@ -61,7 +61,7 @@ function modalOpen(e) {
     <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}" onerror="this.onerror=null; this.src='${notFound}';"/>
   </div>
   <div class="film-modal__info-container">
-    <h2 class="film-modal__title">${title},</h2>
+    <h2 class="film-modal__title">${title}</h2>
     <table class="film-modal__table">
       <tbody class="film-modal__cell1">
         <tr>
