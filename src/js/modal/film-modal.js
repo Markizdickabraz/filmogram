@@ -4,6 +4,7 @@ const STORAGE_PAGE = 'storagePage';
 const STORAGE_KEY = 'genresId';
 
 const backdrop = document.querySelector('.backdrop');
+const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
 
 const IMGURL = `https://image.tmdb.org/t/p/w500/`;
 let filmArr = [];
@@ -45,6 +46,7 @@ function modalOpen(e) {
                 genreArr.push(genre.name);
               }
             }
+            
             return (
               sessionStorage.setItem('current-film-id', id),
               `<div class="film-modal" >
@@ -54,12 +56,9 @@ function modalOpen(e) {
     type="button"
     id="btnClose"
   >
-    <svg class="film-modal__btn-icon-close" width="20" height="20">
-      <use href="/src/images/icons.svg#icon-close"></use>
-    </svg>
   </button>
   <div class="film-modal__thumb">
-    <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}" />
+    <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}" onerror="this.onerror=null; this.src='${notFound}';"/>
   </div>
   <div class="film-modal__info-container">
     <h2 class="film-modal__title">${title},</h2>
@@ -122,6 +121,10 @@ function modalOpen(e) {
         )
         .join('');
       modal.innerHTML = markupModal;
+      const closeBtn = document.querySelector('#btnClose');
+      console.log('closeBtn: ', closeBtn);
+
+      closeBtn.addEventListener('click', onCloseBtnClick);
     }
   }
 }
@@ -144,3 +147,9 @@ function CloseModalClickEsc() {
     filmArr = [];
   });
 }
+
+function onCloseBtnClick(e) {
+  backdrop.classList.add('isHidden');
+  filmArr = [];
+}
+

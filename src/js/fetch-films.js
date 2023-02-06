@@ -26,11 +26,12 @@ export default class NewAskServer {
     }
   }
   async fetchSearchId(request, page = 1) {
-    this.BASEURL_GENRES = `https://api.themoviedb.org/3/genre/movie/list?`;
+    this.STORAGE_TOTAL_PAGES = 'totalPages';
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/search/movie?${this.api_key}&language=en-US&page=${page}&include_adult=false&query=${request}`
       );
+      localStorage.setItem(this.STORAGE_TOTAL_PAGES, response.data.total_pages);
       return response.data.results;
     } catch (error) {
       console.log(error);

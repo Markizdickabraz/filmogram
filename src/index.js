@@ -6,3 +6,4 @@ import './js/pagination';
 import './js/seach';
 import './js/local-strage';
 import './js/add-to-watched&queue';
+import './js/spinner';

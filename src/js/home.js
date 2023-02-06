@@ -1,4 +1,5 @@
 import NewAskServer from './fetch-films';
+import loader from './spinner'
 
 const gallery = document.querySelector('.films__list');
 console.log('gallery', gallery);
@@ -12,11 +13,13 @@ askServerByReting();
 
 async function askServerByReting() {
   try {
+    loader.spinner.show()
     const data = await newAskServer.fetchMovieRating();
     const result = data.data.results;
     localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
     console.log(result);
     renderMovieRatingPage(result);
+    loader.spinner.close()
 
   } catch (error) {
     console.log(error.message);
@@ -35,6 +38,7 @@ async function saveInLocalStorageGenresId() {
 
 function renderMovieRatingPage(result) {
   const IMGURL = `https://image.tmdb.org/t/p/w500/`;
+  const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const markup = result
@@ -47,7 +51,8 @@ function renderMovieRatingPage(result) {
       }
       return `
             <li class="films__card">
-<img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
+<img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='${notFound}';";"
+/>
   <div class="films__desc">
     <h3 class="films__title">${title}</h3>
     <p class="films__genre">
