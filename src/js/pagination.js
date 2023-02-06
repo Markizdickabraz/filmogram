@@ -63,10 +63,16 @@ firstPageRef.style.display = "none";  // problems?? yes
 // firstPageRef.style.display = "none";  // problems??
 // firstPageRef.style.display = "inline";
 
+// rightArrowRef.style.display = "none";
+// afterDotsRef.style.display = "none";
+
+
+
+
 function onPaginationClick(event) {
   if (event.target.tagName === 'BUTTON') {
     // const totalPagesStr = localStorage.getItem(STORAGE_TOTAL_PAGES);
-    const totalPages = Number(localStorage.getItem(STORAGE_TOTAL_PAGES));
+    let totalPages = Number(localStorage.getItem(STORAGE_TOTAL_PAGES));
     lastPageRef.textContent = totalPages;
     
     if (Number(event.target.textContent)) {
@@ -90,6 +96,7 @@ function onPaginationClick(event) {
       btn4Ref.textContent = Number(btn4Ref.textContent) + 5;
       btn5Ref.textContent = Number(btn5Ref.textContent) + 5;
       currentPage = btn1Ref.textContent;
+      checkPaginationEnd(totalPages);
     }
 
     if (event.target.classList.contains('arrow-left') && currentPage >= 5) {
@@ -150,6 +157,36 @@ function onPaginationClick(event) {
     // gallery.innerHTML = '';
     goToPage(currentPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function checkPaginationEnd(totalPages) {
+  if ((totalPages - Number(currentPage)) < 5) {
+    // rightArrowRef.style.display = "none";
+    // afterDotsRef.style.display = "none";
+
+    // btn1Ref.textContent = totalPages - 5;
+    // btn2Ref.textContent = totalPages - 4;
+    // btn3Ref.textContent = totalPages - 3;
+    // btn4Ref.textContent = totalPages - 2;
+    // btn5Ref.textContent = totalPages - 1;
+    // currentPage = btn1Ref.textContent;
+    // rightArrowRef.style.display = "none";
+    // afterDotsRef.style.display = "none";
+
+    // rightArrowRef.style.display = "none";
+    // afterDotsRef.style.display = "none";
+    btns.forEach(el => el.classList.remove('pagination--current'));
+    btn1Ref.textContent = Number(lastPageRef.textContent) - 4;
+    btn2Ref.textContent = Number(lastPageRef.textContent) - 3;
+    btn3Ref.textContent = Number(lastPageRef.textContent) - 2;
+    btn4Ref.textContent = Number(lastPageRef.textContent) - 1;
+    btn5Ref.textContent = lastPageRef.textContent;
+    btn5Ref.classList.add('pagination--current');
+    currentPage = btn5Ref.textContent;
+    rightArrowRef.style.display = "none";
+    afterDotsRef.style.display = "none";
+    lastPageRef.style.display = "none";
   }
 }
 
