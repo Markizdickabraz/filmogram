@@ -53,9 +53,9 @@ let currentPage = 1;  // necessary? // storage is better
 let btns = document.querySelectorAll('.pagin-btn');
 
 // prevDotsRef.style.display = "none";
-prevDotsRef.hidden = true;  // problems?? no
-leftArrowRef.hidden = true;  // problems?? yes
-firstPageRef.hidden = true;  // problems?? yes
+prevDotsRef.style.display = "none";  // problems?? no
+leftArrowRef.style.display = "none";  // problems?? yes
+firstPageRef.style.display = "none";  // problems?? yes
 
 // prevDotsRef.style.display = "none";  // problems??
 // leftArrowRef.style.display = "none";  // problems??
@@ -68,8 +68,8 @@ function onPaginationClick(event) {
       currentPage = Number(event.target.textContent);
     }
 
-    prevDotsRef.hidden = true;
-    afterDotsRef.hidden = true;
+    prevDotsRef.style.display = "none";
+    afterDotsRef.style.display = "none";
 
     if (event.target.classList.contains('pagin-btn')) {
       btns.forEach(el => el.classList.remove('pagination--current'));
@@ -107,9 +107,9 @@ function onPaginationClick(event) {
       btn5Ref.textContent = 5;
       btn1Ref.classList.add('pagination--current');
       currentPage = btn1Ref.textContent;
-      leftArrowRef.hidden = true;
-      prevDotsRef.hidden = true;
-      firstPageRef.hidden = true;
+      leftArrowRef.style.display = "none";
+      prevDotsRef.style.display = "none";
+      firstPageRef.style.display = "none";
     }
 
     if (event.target.classList.contains('last-btn')) {
@@ -121,25 +121,25 @@ function onPaginationClick(event) {
       btn5Ref.textContent = lastPageRef.textContent;
       btn5Ref.classList.add('pagination--current');
       currentPage = btn5Ref.textContent;
-      rightArrowRef.hidden = true;
-      afterDotsRef.hidden = true;
-      lastPageRef.hidden = true;
+      rightArrowRef.style.display = "none";
+      afterDotsRef.style.display = "none";
+      lastPageRef.style.display = "none";
     }
 
     if (Number(currentPage) > 5) {
-      leftArrowRef.hidden = false;
-      prevDotsRef.hidden = false;
-      firstPageRef.hidden = false;
+      leftArrowRef.style.display = "inline";
+      prevDotsRef.style.display = "inline";
+      firstPageRef.style.display = "inline";
     } else {
-      leftArrowRef.hidden = true;
-      prevDotsRef.hidden = true;
-      firstPageRef.hidden = true;
+      leftArrowRef.style.display = "none";
+      prevDotsRef.style.display = "none";
+      firstPageRef.style.display = "none";
     }
 
     if (Number(currentPage) < 996) {
-      rightArrowRef.hidden = false;
-      afterDotsRef.hidden = false;
-      lastPageRef.hidden = false;
+      rightArrowRef.style.display = "inline";
+      afterDotsRef.style.display = "inline";
+      lastPageRef.style.display = "inline";
     }
 
     // gallery.innerHTML = '';
@@ -158,9 +158,9 @@ function paginationReset(event) {
   btn5Ref.textContent = 5;
   btn1Ref.classList.add('pagination--current');
   currentPage = btn1Ref.textContent;
-  leftArrowRef.hidden = true;
-  prevDotsRef.hidden = true;
-  firstPageRef.hidden = true;
+  leftArrowRef.style.display = "none";
+  prevDotsRef.style.display = "none";
+  firstPageRef.style.display = "none";
 }
 
 let pageSize = 9;
