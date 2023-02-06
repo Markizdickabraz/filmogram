@@ -8,6 +8,7 @@ console.log(header);
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_CURRENT_REQUEST = 'currentRequest';
+let currentRequest = '';
 
 const form = document.querySelector('.search-form');
 const searchFormInput = document.querySelector('.search-form__input');
