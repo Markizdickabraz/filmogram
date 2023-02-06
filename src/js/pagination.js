@@ -6,6 +6,7 @@ const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
 // const STORAGE_PAGE_NUMBER = 'storagePageNumber';
 const STORAGE_CURRENT_REQUEST = 'currentRequest';
+const STORAGE_TOTAL_PAGES = 'totalPages';
 
 // example
 // async function foo() {
@@ -64,6 +65,10 @@ firstPageRef.style.display = "none";  // problems?? yes
 
 function onPaginationClick(event) {
   if (event.target.tagName === 'BUTTON') {
+    // const totalPagesStr = localStorage.getItem(STORAGE_TOTAL_PAGES);
+    const totalPages = Number(localStorage.getItem(STORAGE_TOTAL_PAGES));
+    lastPageRef.textContent = totalPages;
+    
     if (Number(event.target.textContent)) {
       currentPage = Number(event.target.textContent);
     }
@@ -76,7 +81,7 @@ function onPaginationClick(event) {
       event.target.classList.add('pagination--current');
     }
 
-    if (event.target.classList.contains('arrow-right') && currentPage < 1000) {
+    if (event.target.classList.contains('arrow-right') && currentPage < totalPages) {
       btns.forEach(el => el.classList.remove('pagination--current'));
       btn1Ref.classList.add('pagination--current');
       btn1Ref.textContent = Number(btn1Ref.textContent) + 5;
@@ -136,7 +141,7 @@ function onPaginationClick(event) {
       firstPageRef.style.display = "none";
     }
 
-    if (Number(currentPage) < 996) {
+    if (Number(currentPage) < (totalPages - 4)) {
       rightArrowRef.style.display = "inline";
       afterDotsRef.style.display = "inline";
       lastPageRef.style.display = "inline";
@@ -161,6 +166,8 @@ function paginationReset(event) {
   leftArrowRef.style.display = "none";
   prevDotsRef.style.display = "none";
   firstPageRef.style.display = "none";
+  const totalPages = Number(localStorage.getItem(STORAGE_TOTAL_PAGES));
+  lastPageRef.textContent = totalPages;
 }
 
 let pageSize = 9;
