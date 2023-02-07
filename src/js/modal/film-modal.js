@@ -40,6 +40,7 @@ export default function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //     return;
   CloseModalClickEsc();
+  scroll.disabledScroll();
 
   let parent = e.srcElement;
   while (parent.id != "film_card") {
@@ -184,6 +185,7 @@ export default function modalOpen(e) {
 
 backdrop.addEventListener('click', closeModal);
 function closeModal(e) {
+   scroll.enabledScroll();
   if (e.target.classList[0] !== 'backdrop') {
     return;
   }
