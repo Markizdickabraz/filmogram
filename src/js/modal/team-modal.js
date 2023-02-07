@@ -1,95 +1,38 @@
-import * as basicLightbox from 'basiclightbox';
-// import kirilUrl from '../images/team-kiril.jpeg';
-// import katerynaUrl from '../images/team-kateryna.jpeg';
-// import artemUrl from '../images/team-artem.jpeg';
-// import markUrl from '../images/team-mark.jpeg';
-// import maksymUrl from '../images/team-maksym.jpeg';
-// import andriyUrl from '../images/team-andriy.jpeg';
-// import vadymUrl from '../images/team-vadym.jpeg';
-// import liudmylaUrl from '../images/team-liudmyla.jpg';
-import iconsUrl from '../../images/icons.svg';
-
-// const footerBtn = document.querySelector('.js-team-modal');
-// footerBtn.addEventListener("click", openModal)
-
-const markup = `<div class="team-wrapper"><div class="team-card">
-    <img src="" alt="Kiril" class="team-image">
-    <p class="team-name">Kiril</p>
-    <p class="team-role">Team Lead</p>
-    <a href="https://github.com/ttsiutsiura" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
-      <use href=""></use>
-    </svg></a>
-</div>
-<div class="team-card">
-    <img src="" alt="Kateryna" class="team-image">
-    <p class="team-name">Kateryna</p>
-    <p class="team-role">Scrum Master</p>
-    <a href="https://github.com/panchenko-kate" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
-      <use href=""></use>
-    </svg></a>
-</div>
-<div class="team-card">
-    <img src="" alt="Artem" class="team-image">
-    <p class="team-name">Artem</p>
-    <p class="team-role">Developer</p>
-    <a href="https://github.com/ArtemS25" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
-      <use href=""></use>
-    </svg></a>
-</div>
-<div class="team-card">
-    <img src="" alt="Mark" class="team-image">
-    <p class="team-name">Mark</p>
-    <p class="team-role">Developer</p>
-    <a href="https://github.com/Markizdickabraz" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
-      <use href=""></use>
-    </svg></a>
-</div>
-<div class="team-card">
-    <img src="" alt="Maksym" class="team-image">
-    <p class="team-name">Maksym</p>
-    <p class="team-role">Developer</p>
-    <a href="https://github.com/Maksym-Plutenko" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
-      <use href=""></use>
-    </svg></a>
-</div>
-<div class="team-card">
-    <img src="" alt="Andriy" class="team-image">
-    <p class="team-name">Andriy</p>
-    <p class="team-role">Developer</p>
-    <a href="https://github.com/Andriyan78" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
-      <use href=""></use>
-    </svg></a>
-</div>
-<div class="team-card">
-    <img src="" alt="Vadym" class="team-image">
-    <p class="team-name">Vadym</p>
-    <p class="team-role">Developer</p>
-    <a href="https://github.com/aspirantmpm" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
-      <use href=""></use>
-    </svg></a>
-</div>
-<div class="team-card">
-    <img src="" alt="Liudmyla" class="team-image">
-    <p class="team-name">Liudmyla</p>
-    <p class="team-role">Developer</p>
-    <a href="https://github.com/liudmyla-ch" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
-      <use href=""></use>
-    </svg></a>
-</div></div>`;
-
-const container = document.querySelector('.js-team-modal');
-
-container.addEventListener('click', openModal);
-
-const modal = basicLightbox.create(markup);
-
-function openModal(e) {
-  modal.show();
-  window.addEventListener('keydown', closeModalHandler);
-  function closeModalHandler(e) {
-    if (e.code === 'Escape') {
-      modal.close();
-      window.removeEventListener('keydown', closeModalHandler);
-    }
+const openTeamBtn = document.querySelector('.js-modal-open');
+const closeTeamBtn = document.querySelector('.js-modal-close');
+const modalTeam = document.querySelector('.js-modal-team');
+openTeamBtn.addEventListener('click', openModalTeam);
+function openModalTeam(evt) {
+  evt.preventDefault();
+  toggleTeam();
+  document.addEventListener('keydown', onEscKeyPress);
+  document.body.style.overflow = 'hidden';
+  closeTeamBtn.addEventListener('click', closeModalTeam);
+  modalTeam.addEventListener('click', onBackdropClick);
+}
+function toggleTeam() {
+  modalTeam.classList.toggle('is-hidden');
+}
+function closeModalTeam() {
+  toggleTeam();
+  closeTeamBtn.removeEventListener('click', closeModalTeam);
+  document.body.removeAttribute('style');
+}
+function onBackdropClick(evt) {
+  if (evt.currentTarget === evt.target) {
+    document.body.removeAttribute('style');
+    toggleTeam();
+    document.removeEventListener('keydown', onEscKeyPress);
+    modalTeam.removeEventListener('click', onBackdropClick);
+  }
+}
+function onEscKeyPress(evt) {
+  const ESK_KEY_CODE = 'Escape';
+  const isEskKey = evt.code == ESK_KEY_CODE;
+  if (isEskKey) {
+    toggleTeam();
+    document.removeEventListener('keydown', onEscKeyPress);
+    closeTeamBtn.removeEventListener('click', closeModalTeam);
+    modalTeam.removeEventListener('click', onBackdropClick);
   }
 }
