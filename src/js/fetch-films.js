@@ -1,6 +1,14 @@
 import axios from 'axios';
 
+axios.defaults.baseURL = 'https://api.themoviedb.org/3';
+
 export default class NewAskServer {
+
+  #API_KEY = 'faab19b092cac6c59a97dec233a38f4d';
+  totalMovies = 0;
+  query = '';
+  genres = [];
+
   constructor() {
     this.api_key = `api_key=faab19b092cac6c59a97dec233a38f4d`;
     this.STORAGE_PAGINATION_TYPE = 'paginationType';
@@ -45,4 +53,19 @@ export default class NewAskServer {
       console.log(error);
     }
   }
+
+  async fetchTrailerById(id) {
+    const params = new URLSearchParams({
+      api_key: this.#API_KEY,
+    });
+    return await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/videos?${params}`
+    ).then(response => {
+      if (!response.ok) {
+        throw new Error('Oops, there is no movie with that name');
+      }
+      return response.json();
+    });
+  }
+
 }
