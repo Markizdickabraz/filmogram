@@ -12,14 +12,11 @@ async function goToPage(pageNumber) {
   const paginationType = localStorage.getItem(STORAGE_PAGINATION_TYPE);
   if (paginationType === 'seach') {
     await goToPageSeach(pageNumber);
-  }
-  if (paginationType === 'rating') {
+  } else if (paginationType === 'rating') {
     await goToPageRating(pageNumber);
-  } 
-  
-  // else {
-  //   console.log('Unknown pagination type!');
-  // }
+  } else {
+    console.log('Unknown pagination type!');
+  }
 }
 
 async function goToPageSeach(pageNumber) {
@@ -30,11 +27,6 @@ async function goToPageSeach(pageNumber) {
 }
 
 async function goToPageRating(pageNumber) {
-  console.log('Rating works!');
-  console.log(pageNumber);
-  console.log(Number(pageNumber));
-
-  // const request = localStorage.getItem(STORAGE_CURRENT_REQUEST);
   const response = await seachServer.fetchMovieRating(pageNumber);
   const result = response.data.results;
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
