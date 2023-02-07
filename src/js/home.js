@@ -43,7 +43,7 @@ function renderMovieRatingPage(result) {
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const markup = result
-    .map(({ poster_path, title, genre_ids, release_date}) => {
+    .map(({id, poster_path, title, genre_ids, release_date}) => {
       let genreArr = [];
       for (const genre of parseGenresJson) {
         if (genre_ids.includes(genre.id)) {
@@ -51,7 +51,7 @@ function renderMovieRatingPage(result) {
         }
       }
       return `
-            <li class="films__card">
+            <li class="films__card" data-id="${id}" id="film_card">
 <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='${notFound}';";"
 />
   <div class="films__desc">
