@@ -18,10 +18,7 @@ export default class NewAskServer {
     try {
       console.log('page '+page);
       this.BASEURL = `https://api.themoviedb.org/3/trending/movie/day?`;
-      // const pageNum = Number(page);
       const ending = '&page='+page;
-      console.log(ending);
-      console.log(`${this.BASEURL}${this.api_key}${ending}`);
       const response = await axios.get(`${this.BASEURL}${this.api_key}${ending}`);
       localStorage.setItem(this.STORAGE_PAGINATION_TYPE, 'rating');
       return response;
