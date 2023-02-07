@@ -10,7 +10,7 @@
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     margin-left: auto;
     margin-right: auto;
   }
@@ -18,17 +18,11 @@
   @media screen and (min-width: 768px) {
     width: 336px;
     height: 494px;
-    flex-basis: calc(100% / 2 - 32px);
-    margin-left: 32px;
-    margin-top: 32px;
   }
 
   @media screen and (min-width: 1280px) {
     width: 394px;
     height: 634px;
-    flex-basis: calc(100% / 3 - 16px);
-    margin-left: 16px;
-    margin-top: 32px;
   }
 
   &:hover,
