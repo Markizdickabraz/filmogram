@@ -8,4 +8,6 @@ import './js/local-strage';
 import './js/add-to-watched&queue';
 import './js/spinner';
 import './js/night';
+
+
 import './js/filter-by-genres';
