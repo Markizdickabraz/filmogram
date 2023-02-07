@@ -162,4 +162,21 @@
   }
 }
 
+.brightness__btn{
+  background-color: transparent;
+  display: flex;
+  margin-left: auto;
+}
+
+.brightness__icon {
+  width: 24px;
+  height: 24px;
+  fill: $white-font-color;
+  
+  &:hover,
+  &:focus {
+    fill: $red-font-color;    
+  }
+}
+
 
