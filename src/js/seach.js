@@ -5,8 +5,6 @@ const seachServer = new NewAskServer();
 
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
-// let currentRequest = ''; // for pagination
-// const STORAGE_PAGE_NUMBER = 'storagePageNumber';
 const STORAGE_CURRENT_REQUEST = 'currentRequest';
 
 const form = document.querySelector('.search-form');
@@ -30,7 +28,6 @@ async function formHandler(event) {
   const response = await seachServer.fetchSearchId(request);
 
   if (response.length > 0) {
-    // currentRequest = request; // for pagination
     localStorage.setItem(STORAGE_CURRENT_REQUEST, request);
     localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
     let paginationReset = new Event('reset');
@@ -42,7 +39,6 @@ async function formHandler(event) {
     console.log(
       'Search result not successful. Enter the correct movie name and try again.'
     );
-    // error message generation must be here
   }
 
   loader.spinner.close();
@@ -52,8 +48,7 @@ export default function drawGallery() {
   const IMG_URL = `https://image.tmdb.org/t/p/w500/`;
   const allGenresArr = JSON.parse(localStorage.getItem(STORAGE_KEY));
   const filmList = JSON.parse(localStorage.getItem(STORAGE_PAGE));
-
-  // console.log('drG works!');
+  const ERR_IMG_URL = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
 
   let markup = '';
 
@@ -71,7 +66,7 @@ export default function drawGallery() {
         <li class="films__card">
             <img class="films__img" src="${IMG_URL}${film.poster_path}" alt="${
         film.title
-      }" loading="lazy" />
+      }" loading="lazy" onerror="this.onerror=null; this.src='${ERR_IMG_URL}';" />
             <div class="films__desc">
                 <h3 class="films__title">${film.title}</h3>
                 <p class="films__genre">

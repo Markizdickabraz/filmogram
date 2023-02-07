@@ -6,7 +6,7 @@ console.log('gallery', gallery);
 const newAskServer = new NewAskServer();
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
-
+const STORAGE_TOTAL_PAGES = 'totalPages';
 
 saveInLocalStorageGenresId();
 askServerByReting();
@@ -15,9 +15,10 @@ async function askServerByReting() {
   try {
     loader.spinner.show()
     const data = await newAskServer.fetchMovieRating();
+    localStorage.setItem(STORAGE_TOTAL_PAGES, data.data.total_pages);
     const result = data.data.results;
     localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
-    console.log(result);
+    // console.log(result);
     renderMovieRatingPage(result);
     loader.spinner.close()
 
@@ -29,7 +30,7 @@ async function askServerByReting() {
 async function saveInLocalStorageGenresId() {
   try {
     const genreData = await newAskServer.fetchGenresId();
-    console.log(genreData);
+    // console.log(genreData);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(genreData));
   } catch (error) {
     console.log(error);
