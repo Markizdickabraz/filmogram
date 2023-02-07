@@ -6,11 +6,39 @@ const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_CURRENT_REQUEST = 'currentRequest';
 const STORAGE_TOTAL_PAGES = 'totalPages';
+const STORAGE_PAGINATION_TYPE = 'paginationType';
 
 async function goToPage(pageNumber) {
+  const paginationType = localStorage.getItem(STORAGE_PAGINATION_TYPE);
+  if (paginationType === 'seach') {
+    await goToPageSeach(pageNumber);
+  }
+  if (paginationType === 'rating') {
+    await goToPageRating(pageNumber);
+  } 
+  
+  // else {
+  //   console.log('Unknown pagination type!');
+  // }
+}
+
+async function goToPageSeach(pageNumber) {
   const request = localStorage.getItem(STORAGE_CURRENT_REQUEST);
   const response = await seachServer.fetchSearchId(request, pageNumber);
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(response));
+  drawGallery();
+}
+
+async function goToPageRating(pageNumber) {
+  console.log('Rating works!');
+  console.log(pageNumber);
+  console.log(Number(pageNumber));
+
+  // const request = localStorage.getItem(STORAGE_CURRENT_REQUEST);
+  const response = await seachServer.fetchMovieRating(pageNumber);
+  const result = response.data.results;
+  localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
+  console.log(result);
   drawGallery();
 }
 

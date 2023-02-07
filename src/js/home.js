@@ -7,7 +7,6 @@ const newAskServer = new NewAskServer();
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
 
-
 saveInLocalStorageGenresId();
 askServerByReting();
 
