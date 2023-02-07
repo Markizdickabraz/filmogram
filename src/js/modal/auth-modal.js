@@ -16,6 +16,7 @@ const signInNow = document.querySelector('.signIn_now');
 openAuthModal.addEventListener("click", toggleModal);
 closeAuthModal.addEventListener("click", toggleModal);
 
+
 function toggleModal() {
 authModal.classList.toggle("is-hidden");
 }

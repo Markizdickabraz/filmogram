@@ -36,7 +36,7 @@ let filmArr = [];
 if (filmsList) {
   filmsList.addEventListener('click', modalOpen);
 }
-function modalOpen(e) {
+export default function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //     return;
   CloseModalClickEsc();

@@ -1,3 +1,5 @@
+import modalOpen from "./modal/film-modal";
+
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_KEY = 'genresId';
 
@@ -8,11 +10,13 @@ const libraryList = document.querySelector('.films-library__list');
 renderWatchedList();
 
 function renderWatchedList() {
+  if (watchBtn) {
     if (watchBtn.classList[2] === 'isActive') {
-        renderPage();
+      console.dir(watchBtn);
+      renderPage();
     }
-}
-
+  }
+};
 
 function renderPage() {
     const watchPageJson = localStorage.getItem(STORAGE_PAGE);
@@ -21,7 +25,7 @@ function renderPage() {
     const getGenresJson = localStorage.getItem(STORAGE_KEY);
     const parseGenresJson = JSON.parse(getGenresJson);
     const IMGURL = `https://image.tmdb.org/t/p/w500/`;
-  const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
+    const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
     const markupPage = parseWatched.map(({id, poster_path, title, genre_ids, release_date}) => {
       let genreArr = [];
       for (const genre of parseGenresJson) {
@@ -46,4 +50,8 @@ function renderPage() {
     })
     .join('');
   libraryList.innerHTML = markupPage;
+}
+
+if (libraryList) {
+  libraryList.addEventListener('click', modalOpen);
 }
