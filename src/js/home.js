@@ -27,7 +27,7 @@ async function askServerByReting() {
   }
 }
 
-async function saveInLocalStorageGenresId() {
+export default async function saveInLocalStorageGenresId() {
   try {
     const genreData = await newAskServer.fetchGenresId();
     // console.log(genreData);
