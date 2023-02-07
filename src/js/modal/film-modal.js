@@ -16,7 +16,7 @@ filmsList.addEventListener('click', modalOpen);
 function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //   return;
-  
+  scroll.disabledScroll();
     CloseModalClickEsc();
     
     let parent = e.srcElement;
@@ -151,7 +151,8 @@ function modalOpen(e) {
 
   backdrop.addEventListener('click', closeModal);
   function closeModal(e) {
-    if (e.target.classList[0] !== 'backdrop') {
+     scroll.enabledScroll();
+      if (e.target.classList[0] !== 'backdrop') {
       return;
     }
     backdrop.classList.add('isHidden');
@@ -159,18 +160,37 @@ function modalOpen(e) {
   }
 
   function CloseModalClickEsc() {
-    document.addEventListener('keydown', event => {
+      document.addEventListener('keydown', event => {
       if (event.key !== 'Escape') {
         return;
       }
       backdrop.classList.add('isHidden');
       filmArr = [];
+      
     });
   }
 
   function onCloseBtnClick(e) {
     backdrop.classList.add('isHidden');
     filmArr = [];
+  }
+}
+
+const scroll = {
+  disabledScroll() {
+    document.body.style.cssText = `
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left:0;
+    height: 100vh;
+    width: 100vw;
+    padding-right: ${window.innerWidth - document.body.offsetWidth}px`
+  },
+  enabledScroll() {
+    document.body.style.cssText = `
+    position: relative;`;
+    window.scroll({ top: scroll.scrollPosition })
   }
 }
 
