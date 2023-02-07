@@ -65,7 +65,7 @@ export default function drawGallery() {
     markup =
       markup +
       `
-        <li class="films__card">
+        <li class="films__card" data-id="${film.id}" id="film_card">
             <img class="films__img" src="${IMG_URL}${film.poster_path}" alt="${
         film.title
       }" loading="lazy" onerror="this.onerror=null; this.src='${ERR_IMG_URL}';" />

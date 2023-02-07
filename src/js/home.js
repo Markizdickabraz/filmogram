@@ -66,5 +66,7 @@ function renderMovieRatingPage(result) {
             `;
     })
     .join('');
-  gallery.innerHTML = markup;
+  if (gallery) {
+    gallery.innerHTML = markup;
+ }
 }
