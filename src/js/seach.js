@@ -13,7 +13,9 @@ const gallery = document.querySelector('.films__list');
 const paginationRef = document.querySelector('.pagination-container');
 const badRequest = document.querySelector('.bad-request');
 
-form.addEventListener('submit', formHandler);
+if (form) {
+  form.addEventListener('submit', formHandler);
+}
 
 async function formHandler(event) {
   event.preventDefault();
