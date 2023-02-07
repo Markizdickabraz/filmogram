@@ -173,3 +173,4 @@ function modalOpen(e) {
     filmArr = [];
   }
 }
+
