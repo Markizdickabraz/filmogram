@@ -1,5 +1,5 @@
-
-.films__list {
+.films__list,
+.films-library__list {
   padding-top: 20px;
   min-height: 360px;
 
@@ -8,13 +8,13 @@
     display: flex;
     flex-wrap: wrap;
     gap: 32px;
-    
+
     // height: 5280px;
   }
 
   @media screen and (min-width: 1280px) {
-   row-gap: 32px;
-   column-gap: 16px;
+    row-gap: 32px;
+    column-gap: 16px;
 
     // height: 4682px;
   }

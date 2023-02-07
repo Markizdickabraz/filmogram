@@ -12,7 +12,11 @@ const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad
 
 const IMGURL = `https://image.tmdb.org/t/p/w500/`;
 let filmArr = [];
-filmsList.addEventListener('click', modalOpen);
+
+
+if (filmsList) {
+  filmsList.addEventListener('click', modalOpen);
+}
 function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //   return;
