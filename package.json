@@ -1,11 +1,11 @@
 {
-  "name": "parcel-project-template",
+  "name": "filmogram",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://ttsiutsiura.github.io/team-project-js",
+  "homepage": "https://Markizdickabraz.github.io/filmogram",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /team-project-js/"
+    "build": "parcel build src/*.html --public-url /filmogram/"
   },
   "repository": {
     "type": "git",
