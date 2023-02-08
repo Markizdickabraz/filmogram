@@ -4,10 +4,10 @@ const darkMedia = window.matchMedia('(prefers-color-scheme: dark)');
 
 function onDarkClick() {
     if (darkMedia.matches) {
-        document.body.classList.add('dark');
+        document.body.classList.remove('dark');
         brightnessBtn.style.fill = '$red-font-color'
     } else {
-        document.body.classList.remove('dark');
+        document.body.classList.add('dark');
         brightnessBtn.style.fill = '$white-font-color'
     }
 }

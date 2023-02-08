@@ -109,12 +109,12 @@ export default function modalOpen(e) {
             <span class="film-modal__span film-modal__span-vote film-modal__span-dark">${vote_average.toFixed(
               1
             )}</span> /
-            <span class="film-modal__span film-modal__span--votes film-modal__span-dark">${vote_count}</span>
+            <span class="film-modal__span film-modal__span--votes ">${vote_count}</span>
           </td>
         </tr>
         <tr>
           <td class="film-modal__cell film-modal__modal-text">Popularity</td>
-          <td class="film-modal__cell film-modal__modal-text--popularity">
+          <td class="film-modal__cell film-modal__modal-text--popularity film-modal__cell1-dark">
             ${popularity}
           </td>
         </tr>
@@ -128,14 +128,14 @@ export default function modalOpen(e) {
         </tr>
         <tr>
           <td class="film-modal__cell film-modal__modal-text">Genre</td>
-          <td class="film-modal__cell film-modal__modal-text--genre">
+          <td class="film-modal__cell film-modal__modal-text--genre film-modal__cell1-dark">
             ${genreArr.join(', ')}
           </td>
         </tr>
       </tbody>
     </table>
 
-    <button type='button' class='btn modal__btn button--trailer'>
+    <button type='button' class='btn modal__btn modal__btn-dark button--trailer'>
     <img
       class='img-trailer'
       src=''
