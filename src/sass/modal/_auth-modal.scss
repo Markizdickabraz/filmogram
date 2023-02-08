@@ -12,3 +12,224 @@ position: absolute;
   border-radius: 4px;
 }
 
+.auth-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: auto;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (min-width: $tablet) {
+    width: 460px;
+    padding: 40px;
+  }
+  @media screen and (min-width: $desktop) {
+    width: 528px;
+  }
+}
+
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.auth-modal__btn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background: #ffffff;
+  color: black;
+  background-image: url(/src/images/close.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.auth-modal__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.auth-modal__titleIn,
+.auth-modal__titleUp {
+  color: #000;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.16;
+}
+
+.auth-modal__name,
+.auth-modal__email,
+.auth-modal__password {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.auth-modal__wrap_checkbox {
+  margin-bottom: 30px;
+}
+
+.auth-modal__button_confirm,
+.auth-modal__button_register {
+  cursor: pointer;
+  color: $accent-font-color;
+  border: 1px solid $accent-font-color;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 10px 55px 10px 56px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  font-weight: 550;
+  &:hover,
+  &:focus {
+    color: white;
+    border: 1px solid $accent-font-color;
+    background-color: $accent-font-color;
+  }
+}
+.disabled_for_signUp {
+  color: gray;
+  border-color: gray;
+
+  &:hover,
+  &:focus {
+    color: white;
+    background-color: gray;
+    border-color: gray;
+  }
+}
+.auth-modal__icon {
+  fill: currentColor;
+  transition: fill 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  top: 28px;
+  left: 10px;
+}
+
+.signUp_now__link,
+.signIn_now__link {
+  color: $accent-font-color;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 12px;
+  line-height: calc(14 / 12);
+  letter-spacing: 0.03em;
+  // @media screen and (min-width: $tablet) {
+  //   font-size: 14px;
+  // }
+
+  &:focus,
+  &:hover {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+.auth-modal__label {
+  display: block;
+  font-size: 12px;
+  line-height: calc(14 / 12);
+  letter-spacing: 0.01em;
+  color: #757575;
+  margin-bottom: 4px;
+}
+.auth-modal__input {
+  position: relative;
+  width: 240px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-left: 30px;
+  outline: none;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media screen and (min-width: $tablet) {
+    width: 320px;
+  }
+  @media screen and (min-width: $desktop) {
+    width: 420px;
+  }
+}
+.auth-modal__input:hover,
+.auth-modal__input:focus,
+.auth-modal__input:hover + .auth-modal__icon,
+.auth-modal__input:focus + .auth-modal__icon {
+  fill: $accent-font-color;
+  border-color: $accent-font-color;
+}
+.auth-modal__checkbox {
+  margin-bottom: 30px;
+}
+.auth-modal__checkbox:checked + .auth-modal__text::before {
+  background-image: url(/src/images/checked.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  width: 20px;
+}
+.signUp_now,
+.signIn_now {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  align-items: center;
+}
+.auth-modal__text,
+.signUp_now__text,
+.signIn_now__text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  line-height: calc(14 / 12);
+  letter-spacing: 0.03em;
+  color: #757575;
+  user-select: none;
+
+  @media screen and (min-width: $tablet) {
+    font-size: 12px;
+    line-height: calc(20 / 12);
+  }
+  @media screen and (min-width: $desktop) {
+    font-size: 14px;
+    line-height: calc(24 / 14);
+  }
+}
+.auth-modal__text::before {
+  content: '';
+  width: 20px;
+  height: 14px;
+  border: 1px solid #212121;
+  border-radius: 2px;
+  display: block;
+  margin-right: 8px;
+  @media screen and (min-width: $tablet) {
+    width: 20px;
+    height: 20px;
+  }
+}
+.auth-modal__link {
+  display: block;
+  color: $accent-font-color;
+  text-decoration: underline;
+  @media screen and (min-width: $tablet) {
+    margin-left: 3px;
+  }
+}
+
