@@ -7,20 +7,23 @@ const watchBtn = document.querySelector('.js-btn__watched');
 const queueBtn = document.querySelector('.js-btn__queue');
 const libraryList = document.querySelector('.films-library__list');
 
-queueBtn.addEventListener('click', e => {
-  // e.preventDefault();
+renderPageWached();
 
-  watchBtn.classList.remove('isActive') ||
-    queueBtn.classList.add('isActive') ||
-    renderPageQueue();
-});
-watchBtn.addEventListener('click', e => {
-  // e.preventDefault();
-  renderPageWached();
-  if (watchBtn.classList[3] !== 'isActive')
-    watchBtn.classList.add('isActive') ||
-      queueBtn.classList.remove('isActive' || renderPageWached());
-});
+if (queueBtn) {
+  queueBtn.addEventListener('click', e => {
+    // e.preventDefault();
+    watchBtn.classList.remove('isActive') ||
+      queueBtn.classList.add('isActive') ||
+      renderPageQueue();
+  });
+  watchBtn.addEventListener('click', e => {
+    // e.preventDefault();
+    renderPageWached();
+    if (watchBtn.classList[3] !== 'isActive')
+      watchBtn.classList.add('isActive') ||
+        queueBtn.classList.remove('isActive' || renderPageWached());
+  })
+};
 
 // renderLibrary();
 // console.dir(watchBtn);
@@ -40,7 +43,6 @@ watchBtn.addEventListener('click', e => {
 export function renderPageWached() {
   const watchPageJson = localStorage.getItem('watched');
   const parseWatched = JSON.parse(watchPageJson);
-  console.log(watchPageJson);
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const IMGURL = `https://image.tmdb.org/t/p/w500/`;
@@ -70,12 +72,13 @@ export function renderPageWached() {
             `;
     })
     .join('');
-  libraryList.innerHTML = markupPage;
+  if (libraryList) {
+    libraryList.innerHTML = markupPage;
+  }
 }
 export function renderPageQueue() {
   const queuePageJson = localStorage.getItem('queue');
   const parseQueue = JSON.parse(queuePageJson);
-  console.log(queuePageJson);
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const IMGURL = `https://image.tmdb.org/t/p/w500/`;

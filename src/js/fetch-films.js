@@ -16,7 +16,6 @@ export default class NewAskServer {
 
   async fetchMovieRating(page = 1) {
     try {
-      console.log('page '+page);
       this.BASEURL = `https://api.themoviedb.org/3/trending/movie/day?`;
       const ending = '&page='+page;
       const response = await axios.get(`${this.BASEURL}${this.api_key}${ending}`);
