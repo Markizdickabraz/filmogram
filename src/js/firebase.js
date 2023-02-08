@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, onValue, update, remove } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import Notiflix from 'notiflix';
+import { chooseThemeForNotiflix } from './notiflix';
 import { closeModal } from "./modal/auth-modal";
 
 
@@ -24,6 +25,11 @@ const myLibrary = document.querySelector("#myLibrary");
 const authForm = document.querySelector('.auth-modal__form');
 const checkbox = document.querySelector('#checkbox');
 const btnRegister = document.querySelector('.auth-modal__button_register');
+const btnLogOut = document.querySelector('.header-nav__logout-btn')
+const btnLogIn = document.querySelector('.header-nav__login-btn')
+const itemLogin = document.querySelector('.login')
+const itemLogOut = document.querySelector('.logout')
+
 
 myLibrary.addEventListener("click", signInMyLibrary)
 
@@ -54,6 +60,7 @@ if (checkbox) {
 
 export function onSignIn(evt) {
 evt.preventDefault();
+chooseThemeForNotiflix();
 const email = document.querySelector('#email').value;
 const password = document.querySelector('#password').value;
 if (validateEmail(email) === false || validatePassword(password) === false) {
@@ -69,16 +76,18 @@ signInWithEmailAndPassword(auth, email, password)
             });
             closeModal();
             authForm.reset();
-            Notiflix.Notify.success('Hello there! Welcome back to Filmoteka!');
+            onUserLogIn();
+            Notiflix.Report.success('Hello there!', 'Welcome back to Filmoteka!', 'Nice to be Home!');
         })
         .catch((error) => {
-            Notiflix.Notify.failure('Something went wrong with your reqwest, please try again');
+            Notiflix.Report.warning('Wait a second', 'User with such email already exists, unless you want to steal it 👀', 'Oops');
         });
     user = auth.currentUser;
 };
 
 export function onRegister(evt) { 
     evt.preventDefault();
+    chooseThemeForNotiflix();
     const username = document.querySelector('#name').value;
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
@@ -96,12 +105,36 @@ export function onRegister(evt) {
             });
             closeModal();
             authForm.reset();
-            Notiflix.Notify.success('Welcome to Filmoteka! Enjoy your movies!');
+            Notiflix.Report.success('Nice!', 'Welcome to Filmoteka! Relax and enjoy your movies 🦥', 'Thanks!');
         })
         .catch((error) => {
-            Notiflix.Notify.failure('User with such email already exists!');
+            Notiflix.Report.warning('User with such email already exists!');
         });
     user = auth.currentUser;
+};
+
+if (btnLogOut) {
+    btnLogOut.addEventListener('click', (e) => {
+        chooseThemeForNotiflix();
+        Notiflix.Confirm.show('Exit confirmation',
+            'We hope you had a good time! 💃 🕺 Confirm exit?',
+            'Yes',
+            'No',
+            function okCb() {
+                signOut(auth)
+                    .catch((error) => {
+                        // const errorCode = error.code;
+                        // const errorMessage = error.message;
+                        // alert(errorMessage);
+                        Notiflix.Report.warning('Hah', 'Did you think you would escape so easily? Have one more try 😁', 'Dammit');
+                    });;
+                // Sign-out successful.
+                Notiflix.Report.success('Log out successful')
+            },
+            function cancelCb() {
+                return
+            });
+    });
 };
 
 function validateEmail(email) {
@@ -120,3 +153,29 @@ function validatePassword(password) {
         return true;
     };
 };
+
+function onUserLogIn() {
+    if (btnLogIn && btnLogOut) {
+        itemLogin.classList.add('visually-hidden');
+        itemLogOut.classList.remove('visually-hidden');
+    };
+};
+
+function onUserLogOut() {
+    if (btnLogIn && btnLogOut) {
+        itemLogin.classList.remove('visually-hidden');
+        itemLogOut.classList.add('visually-hidden');
+    };
+};
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in
+        // console.log(auth.currentUser);
+        const uid = user.uid;
+        // console.log(uid);
+        onUserLogIn();
+    } else {
+        // User is signed out
+        onUserLogOut();
+    };
+});

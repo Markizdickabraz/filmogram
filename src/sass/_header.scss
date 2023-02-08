@@ -181,11 +181,15 @@
   }
 }
 
-.header-nav__login-btn{
-
-   
+.header-nav__login-btn, .header-nav__logout-btn{
   &:hover,
   &:focus {
     background-color: $red-font-color;    
   }
 }
+
+.header-nav__login-icon, .header-nav__logout-icon{
+width: 25px;
+height: 20px;
+};
+
