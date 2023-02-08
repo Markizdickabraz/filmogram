@@ -1,3 +1,6 @@
+import { onRegister } from "../firebase";
+import { onSignIn } from "../firebase";
+
 const openAuthModal = document.querySelector(".js-open");
 const closeAuthModal = document.querySelector(".js-close");
 const authModal = document.querySelector(".js-auth-modal");
@@ -12,14 +15,19 @@ const btnConfirm = document.querySelector('.auth-modal__button_confirm');
 const btnRegister = document.querySelector('.auth-modal__button_register');
 const signUpNow = document.querySelector('.signUp_now');
 const signInNow = document.querySelector('.signIn_now');
+const authForm = document.querySelector('.auth-modal__form');
 
 openAuthModal.addEventListener("click", toggleModal);
-closeAuthModal.addEventListener("click", toggleModal);
+closeAuthModal.addEventListener("click", closeModal);
 
 
 function toggleModal() {
 authModal.classList.toggle("is-hidden");
 }
+
+export function closeModal() {
+    authModal.classList.add('is-hidden');
+    }
 
 signUp.addEventListener("click", openRegisterForm)
 
@@ -33,6 +41,8 @@ btnConfirm.classList.add("visually-hidden");
 btnRegister.classList.remove("visually-hidden");
 signUpNow.classList.add("visually-hidden");
 signInNow.classList.remove("visually-hidden");
+authForm.addEventListener('submit', onRegister);
+authForm.removeEventListener('submit', onSignIn);
 }
 
 signIn.addEventListener("click", openAuthForm)
@@ -47,4 +57,6 @@ function openAuthForm(evt) {
     btnRegister.classList.add("visually-hidden");
     signUpNow.classList.remove("visually-hidden");
     signInNow.classList.add("visually-hidden");
+    authForm.addEventListener('submit', onSignIn);
+    authForm.removeEventListener('submit', onRegister);
     }   
