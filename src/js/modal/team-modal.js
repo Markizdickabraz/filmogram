@@ -29,7 +29,6 @@ function onBackdropClick(evt) {
 function onEscKeyPress(evt) {
   const ESK_KEY_CODE = 'Escape';
   const isEskKey = evt.code == ESK_KEY_CODE;
-
   if (isEskKey) {
     toggleTeam();
     document.removeEventListener('keydown', onEscKeyPress);
