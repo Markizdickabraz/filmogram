@@ -4,8 +4,8 @@ export function getTrailer(filmId, movieAPI) {
   try {
     movieAPI.fetchTrailerById(filmId).then(result => {
       const trailers = result.results;
+      const trailerBtn = document.querySelector('.button--trailer');
       if (trailers.length > 0) {
-        const trailerBtn = document.querySelector('.button--trailer');
         trailerBtn.classList.remove('is-hidden');
         const officialTrailer = trailers.find(
           el =>
@@ -23,6 +23,9 @@ export function getTrailer(filmId, movieAPI) {
             ytSrc: `${trailerKey}`,
           });
         }
+      }
+      else {
+        trailerBtn.innerHTML = "Trailer Not Found"
       }
     });
   } catch {
