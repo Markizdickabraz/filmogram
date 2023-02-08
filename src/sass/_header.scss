@@ -78,8 +78,6 @@
 .header-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
   //   @media screen and (min-width: 768px) {
   //     padding: 40px 32px 44px 32px;
   //     height: 216px;
@@ -97,7 +95,7 @@
   margin: 0;
   display: flex;
   gap: 40px;
- 
+  margin-left: auto;
 }
 
 .header-nav__link {
@@ -181,11 +179,4 @@
   }
 }
 
-.header-nav__login-btn{
 
-   
-  &:hover,
-  &:focus {
-    background-color: $red-font-color;    
-  }
-}
