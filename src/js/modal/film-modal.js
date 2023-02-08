@@ -88,7 +88,7 @@ export default function modalOpen(e) {
 
             return (
               localStorage.setItem('current-film-id', id),
-              `<div class="film-modal" >
+              `<div class="film-modal film-modal-dark" >
   <button
     class="film-modal__btn-icon"
     data-modal-close-p
@@ -100,16 +100,16 @@ export default function modalOpen(e) {
     <img class="film-modal__img" src="${IMGURL}${poster_path}" alt="${title}" onerror="this.onerror=null; this.src='${notFound}';"/>
   </div>
   <div class="film-modal__info-container">
-    <h2 class="film-modal__title">${title}</h2>
+    <h2 class="film-modal__title film-modal__title-dark">${title}</h2>
     <table class="film-modal__table">
-      <tbody class="film-modal__cell1">
+      <tbody class="film-modal__cell1 film-modal__cell1-dark">
         <tr>
-          <td class="film-modal__cell film-modal__modal-text">Vote / Votes</td>
+          <td class="film-modal__cell film-modal__modal-text film-modal__cell-dark">Vote / Votes</td>
           <td class="film-modal__cell film-modal__modal-text">
-            <span class="film-modal__span film-modal__span-vote">${vote_average.toFixed(
+            <span class="film-modal__span film-modal__span-vote film-modal__span-dark">${vote_average.toFixed(
               1
             )}</span> /
-            <span class="film-modal__span film-modal__span--votes">${vote_count}</span>
+            <span class="film-modal__span film-modal__span--votes film-modal__span-dark">${vote_count}</span>
           </td>
         </tr>
         <tr>
@@ -143,15 +143,15 @@ export default function modalOpen(e) {
     />START TRAILER</button>
 
     <h3 class="film-modal__subtitle">ABOUT</h3>
-    <p class="fil-modal__text">${overview}</p>
+    <p class="fil-modal__text fil-modal__text-dark">${overview}</p>
     <ul class="film-modal__btn-list">
       <li class="film-modal__btn-item">
-        <button class="btn modal__btn" type="button" data-action="watch">
+        <button class="btn modal__btn modal__btn-dark" type="button" data-action="watch">
           ADD TO WATCHED
         </button>
       </li>
       <li class="film-modal__btn-item">
-        <button class=" btn modal__btn" type="" data-action="queue">
+        <button class=" btn modal__btn modal__btn-dark" type="" data-action="queue">
           ADD TO QUEUE
         </button>
       </li>

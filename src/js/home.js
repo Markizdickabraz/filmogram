@@ -1,5 +1,5 @@
 import NewAskServer from './fetch-films';
-import loader from './spinner'
+import loader from './spinner';
 
 const gallery = document.querySelector('.films__list');
 const newAskServer = new NewAskServer();
@@ -12,16 +12,16 @@ askServerByReting();
 
 async function askServerByReting() {
   try {
-    loader.spinner.show()
+    loader.spinner.show();
     const data = await newAskServer.fetchMovieRating();
     localStorage.setItem(STORAGE_TOTAL_PAGES, data.data.total_pages);
     const result = data.data.results;
     localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
     renderMovieRatingPage(result);
-    loader.spinner.close()
-
   } catch (error) {
     console.log(error.message);
+  } finally {
+    loader.spinner.close();
   }
 }
 
@@ -41,7 +41,7 @@ function renderMovieRatingPage(result) {
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const markup = result
-    .map(({id, poster_path, title, genre_ids, release_date}) => {
+    .map(({ id, poster_path, title, genre_ids, release_date }) => {
       let genreArr = [];
       for (const genre of parseGenresJson) {
         if (genre_ids.includes(genre.id)) {
@@ -55,7 +55,7 @@ function renderMovieRatingPage(result) {
   <div class="films__desc">
     <h3 class="films__title">${title}</h3>
     <p class="films__genre">
-    ${genreArr.slice(0, 2).join(", ")}
+    ${genreArr.slice(0, 2).join(', ')}
       <span>|</span>
       ${release_date.slice(0, 4)}
     </p>
@@ -66,5 +66,5 @@ function renderMovieRatingPage(result) {
     .join('');
   if (gallery) {
     gallery.innerHTML = markup;
- }
+  }
 }
