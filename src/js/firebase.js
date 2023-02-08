@@ -6,14 +6,13 @@ import { closeModal } from "./modal/auth-modal";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCwkE5TX11CtWXr9w8otLQDhfBZe2S2vYI",
-    authDomain: "filmoteka-e9a49.firebaseapp.com",
-    databaseURL: "https://filmoteka-e9a49-default-rtdb.firebaseio.com/",
-    projectId: "filmoteka-e9a49",
-    storageBucket: "filmoteka-e9a49.appspot.com",
-    messagingSenderId: "718449531341",
-    appId: "1:718449531341:web:f35f935baa1d12f2fa0c84",
-    measurementId: "G-NQKNR4BK9N"
+    apiKey: "AIzaSyCT3xbHZQ820MQlv13DaR9eYdlGcCeUNEE",
+    authDomain: "filmogram-6d876.firebaseapp.com",
+    databaseURL: "https://filmogram-6d876-default-rtdb.firebaseio.com",
+    projectId: "filmogram-6d876",
+    storageBucket: "filmogram-6d876.appspot.com",
+    messagingSenderId: "766146491455",
+    appId: "1:766146491455:web:e2843b8d054e83cd60748a"
   };
 
   const app = initializeApp(firebaseConfig);
