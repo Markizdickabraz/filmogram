@@ -1,0 +1,19 @@
+#tags{
+    padding-top: 20px;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+  
+  .tag {
+    color: white;
+    background-color: $accent-bcg-color;
+    padding: 10px 15px;
+    border-radius: 50px;
+    margin: 5px;
+    display: inline-block;
+    cursor: pointer;
+}
