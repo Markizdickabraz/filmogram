@@ -1,17 +1,31 @@
-const upBtn = refs.btnToTop;
-window.addEventListener("scroll", scrollFunction);
-
-function scrollFunction () {
-    if(window.scrollY > 300 && !refs.body.classList.contains('modal-open')) {
-        upBtn.style.display = "block";
-    } else {
-        upBtn.style.display = "none";
-}
-};
-upBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth"
-    })
-});
+const btnUp = {
+    el: document.querySelector('.up-btn__icon'),
+    show() {
+      
+      this.el.classList.remove('up-btn-wrapper');
+    },
+    hide() {
+      
+      this.el.classList.add('up-btn-wrapper');
+    },
+    addEventListener() {
+      
+      window.addEventListener('scroll', () => {
+        
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        
+        scrollY > 400 ? this.show() : this.hide();
+      });
+      
+      document.querySelector('.up-btn__icon').onclick = () => {
+        
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }
+  
+  btnUp.addEventListener();
