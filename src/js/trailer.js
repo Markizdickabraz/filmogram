@@ -1,4 +1,4 @@
-// import BigPicture from 'bigpicture';
+import BigPicture from 'bigpicture';
 
 export function getTrailer(filmId, movieAPI) {
   try {

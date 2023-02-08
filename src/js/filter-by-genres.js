@@ -39,7 +39,7 @@
 //           }
 //         }
 //         console.log(selectedGenge);
-//         askServer(API_URL + 'with_genres ='+encodeURI(selectedGenge.join(',')))
+//         askServer(API_URL + 'with_genres ='+selectedGenge.join(','))
 //       })
 //       tags.append(li);
 //     })
