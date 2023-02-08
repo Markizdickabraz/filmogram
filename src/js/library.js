@@ -6,7 +6,7 @@ const STORAGE_KEY = 'genresId';
 const watchBtn = document.querySelector('.js-btn__watched');
 const queueBtn = document.querySelector('.js-btn__queue');
 const libraryList = document.querySelector('.films-library__list');
-renderPageWached();
+
 queueBtn.addEventListener('click', e => {
   // e.preventDefault();
 
@@ -37,7 +37,7 @@ watchBtn.addEventListener('click', e => {
 //   console.dir(queueBtn);
 // }
 
-function renderPageWached() {
+export function renderPageWached() {
   const watchPageJson = localStorage.getItem('watched');
   const parseWatched = JSON.parse(watchPageJson);
   console.log(watchPageJson);
@@ -71,7 +71,7 @@ function renderPageWached() {
     .join('');
   libraryList.innerHTML = markupPage;
 }
-function renderPageQueue() {
+export function renderPageQueue() {
   const queuePageJson = localStorage.getItem('queue');
   const parseQueue = JSON.parse(queuePageJson);
   console.log(queuePageJson);

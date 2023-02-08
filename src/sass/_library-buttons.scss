@@ -63,6 +63,7 @@
   @media screen and (min-width: 768px) {
     gap: 32px;
     margin-top: 40px;
+    height: 44px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -74,6 +75,13 @@
 .modal__btn {
   color: $black-font-color;
   background-color: transparent;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
 
   @media screen and (max-width: 767px) {
     width: 110px;
