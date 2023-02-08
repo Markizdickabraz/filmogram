@@ -1,0 +1,77 @@
+.dark {
+    background: black;
+    color: white;
+}
+
+body.dark {
+        .container-dark {
+            background-color: black;
+        }
+
+        .footer-title__text-dark {
+            color: $white-font-color;
+        }
+
+        .film-modal-dark {
+            background-color: #393939;
+            color: $white-font-color;
+        }
+
+        .film-modal__title-dark {
+            color: white;
+        }
+
+        .fil-modal__text-dark {
+            color: white;
+        }
+
+        .film-modal__cell1-dark {
+            color: white;
+        }
+
+        .film-modal__span-dark {
+            color: white;
+        }
+
+        .modal__btn-dark {
+            color: white;
+            border: 1px solid white;
+            border-color: white;
+            cursor: pointer;
+        }
+
+        .footer-dark {
+            background-color: black;
+        }
+
+        .pagin-btn-dark {
+            background-color: black;
+            color: white;
+        }
+
+        .pagination--current {
+            background-color: $accent-bcg-color;
+            color: $white-font-color;
+        }
+}
+
+
+
+// .body-dark {
+//     color: $white-font-color;
+//     background-color: black;
+// }
+
+// .container-dark {
+//     background-color: black;
+// }
+
+// .footer-title__text-dark {
+//     color: $white-font-color;
+// }
+
+// .film-modal-dark {
+//     background-color: #393939;
+//     color: $white-font-color;
+// }
+
