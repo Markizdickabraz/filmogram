@@ -1,5 +1,6 @@
 import NewAskServer from '../fetch-films';
 import { getTrailer } from '../trailer';
+import { renderPageQueue, renderPageWached } from '../library';
 
 const scroll = {
   disabledScroll() {
@@ -252,7 +253,7 @@ function addOnQueue() {
       let one = currentList.filter(movie => movie.id === idMovie);
       localStorage.setItem('queue', JSON.stringify(one));
       btnAddToQueue.textContent = 'DELETE FROM QUEUE';
-
+      renderPageQueue();
       return;
     }
 
@@ -274,6 +275,7 @@ function addOnQueue() {
 
     btnAddToQueue.textContent = 'ADD TO QUEUE';
     localStorage.setItem('queue', JSON.stringify(currentList));
+    renderPageQueue();
   }
 }
 
@@ -289,7 +291,7 @@ function addOnWatch() {
       let one = currentWatch.filter(movie => movie.id === idMovie);
       localStorage.setItem('watched', JSON.stringify(one));
       btnAddToWatch.textContent = 'DELETE FROM WATCHED';
-
+      renderPageWached();
       return;
     }
 
@@ -311,6 +313,7 @@ function addOnWatch() {
 
     btnAddToWatch.textContent = 'ADD TO WATCHED';
     localStorage.setItem('watched', JSON.stringify(currentWatch));
+    renderPageWached();
   }
 }
 
