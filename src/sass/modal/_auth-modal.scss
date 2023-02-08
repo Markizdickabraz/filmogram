@@ -1,4 +1,18 @@
 .auth-modal {
+position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  padding: 40px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.auth-modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -116,6 +130,9 @@
   font-size: 12px;
   line-height: calc(14 / 12);
   letter-spacing: 0.03em;
+  // @media screen and (min-width: $tablet) {
+  //   font-size: 14px;
+  // }
 
   &:focus,
   &:hover {
@@ -130,7 +147,7 @@
   color: #757575;
   margin-bottom: 4px;
 }
-.auth-modal_login__input {
+.auth-modal__input {
   position: relative;
   width: 240px;
   padding-top: 11px;
@@ -149,10 +166,10 @@
     width: 420px;
   }
 }
-.auth-modal_login__input:hover,
-.auth-modal_login__input:focus,
-.auth-modal_login__input:hover + .auth-modal__icon,
-.auth-modal_login__input:focus + .auth-modal__icon {
+.auth-modal__input:hover,
+.auth-modal__input:focus,
+.auth-modal__input:hover + .auth-modal__icon,
+.auth-modal__input:focus + .auth-modal__icon {
   fill: $accent-font-color;
   border-color: $accent-font-color;
 }
@@ -215,3 +232,4 @@
     margin-left: 3px;
   }
 }
+
