@@ -16,7 +16,6 @@ export default class NewAskServer {
 
   async fetchMovieRating(page = 1) {
     try {
-      console.log('page '+page);
       this.BASEURL = `https://api.themoviedb.org/3/trending/movie/day?`;
       const ending = '&page='+page;
       const response = await axios.get(`${this.BASEURL}${this.api_key}${ending}`);
@@ -63,18 +62,6 @@ export default class NewAskServer {
       }
       return response.json();
     });
-  }
-
-  async fetchMovies() {
-    this.BASEURL_MOVIES = `https://api.themoviedb.org/3/discover/movie?`;
-      try {
-        const response = await axios.get(
-          `${this.BASEURL_MOVIES}${this.api_key}`
-        );
-        return response;
-      } catch (error) {
-        console.log(error);
-    }
   }
 
 }
