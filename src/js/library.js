@@ -53,6 +53,7 @@ export function renderPageWached() {
           genreArr.push(genre.name);
         }
       }
+
       return `
             <li class="films__card" data-id="${id}" id="film_card">
 <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='${notFound}';";"
