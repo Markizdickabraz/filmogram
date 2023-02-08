@@ -1,5 +1,6 @@
 import NewAskServer from '../fetch-films';
 import { getTrailer } from '../trailer';
+import { renderPageWached, renderPageQueue } from '../library';
 
 const scroll = {
   disabledScroll() {
@@ -10,18 +11,17 @@ const scroll = {
     left:0;
     height: 100vh;
     width: 100vw;
-    padding-right: ${window.innerWidth - document.body.offsetWidth}px`
+    padding-right: ${window.innerWidth - document.body.offsetWidth}px`;
   },
   enabledScroll() {
     document.body.style.cssText = `
     position: relative;`;
-    window.scroll({ top: scroll.scrollPosition })
-  }
-}
+    window.scroll({ top: scroll.scrollPosition });
+  },
+};
 
 const movieAPI = new NewAskServer();
 const filmsList = document.querySelector('.films__list');
-
 
 const modal = document.querySelector('.renderModal');
 const STORAGE_PAGE = 'storagePage';
@@ -47,7 +47,7 @@ export default function modalOpen(e) {
   scroll.disabledScroll();
 
   let parent = e.srcElement;
-  while (parent.id != "film_card") {
+  while (parent.id != 'film_card') {
     parent = parent.parentElement;
   }
   getTrailer(parent.dataset.id, movieAPI);
@@ -174,8 +174,6 @@ export default function modalOpen(e) {
 
       btnAddToQueue.addEventListener('click', addOnQueue);
 
-      // watched
-
       const btnAddToWatch = document.querySelector(
         'button[data-action="watch"]'
       );
@@ -189,7 +187,9 @@ export default function modalOpen(e) {
 
 backdrop.addEventListener('click', closeModal);
 function closeModal(e) {
-   scroll.enabledScroll();
+  renderPageWached();
+  renderPageQueue();
+  scroll.enabledScroll();
   if (e.target.classList[0] !== 'backdrop') {
     return;
   }
@@ -198,8 +198,11 @@ function closeModal(e) {
 }
 
 function CloseModalClickEsc() {
+  renderPageWached();
+  renderPageQueue();
   document.addEventListener('keydown', event => {
     if (event.key !== 'Escape') {
+      renderPageWached();
       return;
     }
     backdrop.classList.add('isHidden');
@@ -208,6 +211,8 @@ function CloseModalClickEsc() {
 }
 
 function onCloseBtnClick(e) {
+  renderPageWached();
+  renderPageQueue();
   backdrop.classList.add('isHidden');
   filmArr = [];
 }
@@ -240,12 +245,10 @@ function checkWatch() {
 
 function addOnQueue() {
   const btnAddToQueue = document.querySelector('button[data-action="queue"]');
-
   if (btnAddToQueue.textContent.trim() === 'ADD TO QUEUE') {
     let currentList = JSON.parse(localStorage.getItem('storagePage'));
 
     let idMovie = JSON.parse(localStorage.getItem('current-film-id'));
-
     if (localStorage.getItem('queue') == null) {
       let one = currentList.filter(movie => movie.id === idMovie);
       localStorage.setItem('queue', JSON.stringify(one));
@@ -280,19 +283,15 @@ function addOnWatch() {
 
   if (btnAddToWatch.textContent.trim() === 'ADD TO WATCHED') {
     let currentWatch = JSON.parse(localStorage.getItem('storagePage'));
-
     let idMovie = JSON.parse(localStorage.getItem('current-film-id'));
-
     if (localStorage.getItem('watched') == null) {
       let one = currentWatch.filter(movie => movie.id === idMovie);
       localStorage.setItem('watched', JSON.stringify(one));
       btnAddToWatch.textContent = 'DELETE FROM WATCHED';
-
       return;
     }
 
     let currenWatch = JSON.parse(localStorage.getItem('watched'));
-
     let selectedMovie = currentWatch.filter(movie => movie.id === idMovie);
     currenWatch.push(selectedMovie[0]);
 
