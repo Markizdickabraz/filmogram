@@ -39,7 +39,12 @@ if (filmsList) {
 export default function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //     return;
+  
+  if (e.target.className === "films__list" || e.target.className === "films-library__list") {
+    return;
+  }
   CloseModalClickEsc();
+  scroll.disabledScroll();
 
   let parent = e.srcElement;
   while (parent.id != "film_card") {
@@ -115,9 +120,9 @@ export default function modalOpen(e) {
         </tr>
         <tr>
           <td class="film-modal__cell film-modal__modal-text">
-            Oraginal Title
+            Original Title
           </td>
-          <td class="film-modal__cell film-modal__modal-text--oraginal">
+          <td class="film-modal__cell film-modal__modal-text--original">
             ${title}
           </td>
         </tr>
@@ -184,6 +189,7 @@ export default function modalOpen(e) {
 
 backdrop.addEventListener('click', closeModal);
 function closeModal(e) {
+   scroll.enabledScroll();
   if (e.target.classList[0] !== 'backdrop') {
     return;
   }
@@ -305,3 +311,26 @@ function addOnWatch() {
     localStorage.setItem('watched', JSON.stringify(currentWatch));
   }
 }
+
+
+import throttle from 'lodash.throttle'
+
+const scrollModal = document.querySelector('.film-modal');
+window.addEventListener('scroll', throttle(onScroll, 150));
+
+function onScroll() {
+  const minimumPxToScroll = 150;
+  if (window.scrollY > minimumPxToScroll) {
+    scrollModal.classList.add(`transitionBtn`);
+    scrollModal.classList.remove(`is-hidden-button`);
+  }
+  if (window.scrollY < minimumPxToScroll) {
+    scrollModal.classList.add(`is-hidden-button`);
+  }
+}
+
+export function toTop() {
+  window.scrollTo(100, 100, 'smooth');
+}
+
+scrollModal.addEventListener('click', toTop); 

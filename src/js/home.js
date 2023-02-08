@@ -2,7 +2,6 @@ import NewAskServer from './fetch-films';
 import loader from './spinner'
 
 const gallery = document.querySelector('.films__list');
-console.log('gallery', gallery);
 const newAskServer = new NewAskServer();
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
@@ -18,7 +17,6 @@ async function askServerByReting() {
     localStorage.setItem(STORAGE_TOTAL_PAGES, data.data.total_pages);
     const result = data.data.results;
     localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
-    // console.log(result);
     renderMovieRatingPage(result);
     loader.spinner.close()
 
@@ -27,7 +25,7 @@ async function askServerByReting() {
   }
 }
 
-export default async function saveInLocalStorageGenresId() {
+async function saveInLocalStorageGenresId() {
   try {
     const genreData = await newAskServer.fetchGenresId();
     // console.log(genreData);
