@@ -66,7 +66,7 @@ export default class NewAskServer {
   }
 
   async fetchMovies() {
-    this.BASEURL_MOVIES = `https://api.themoviedb.org/3/discover/movie?with_genres=35`;
+    this.BASEURL_MOVIES = `https://api.themoviedb.org/3/discover/movie?`;
       try {
         const response = await axios.get(
           `${this.BASEURL_MOVIES}${this.api_key}`

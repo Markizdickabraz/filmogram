@@ -10,4 +10,4 @@ import './js/spinner';
 
 import './js/modal/auth-modal';
 import './js/night';
-import "./js/fiter-by-genres";
+// import './js/filter-by-genres';
