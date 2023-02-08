@@ -10,18 +10,17 @@ const scroll = {
     left:0;
     height: 100vh;
     width: 100vw;
-    padding-right: ${window.innerWidth - document.body.offsetWidth}px`
+    padding-right: ${window.innerWidth - document.body.offsetWidth}px`;
   },
   enabledScroll() {
     document.body.style.cssText = `
     position: relative;`;
-    window.scroll({ top: scroll.scrollPosition })
-  }
-}
+    window.scroll({ top: scroll.scrollPosition });
+  },
+};
 
 const movieAPI = new NewAskServer();
 const filmsList = document.querySelector('.films__list');
-
 
 const modal = document.querySelector('.renderModal');
 const STORAGE_PAGE = 'storagePage';
@@ -39,15 +38,18 @@ if (filmsList) {
 export default function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //     return;
-  
-  if (e.target.className === "films__list" || e.target.className === "films-library__list") {
+
+  if (
+    e.target.className === 'films__list' ||
+    e.target.className === 'films-library__list'
+  ) {
     return;
   }
   CloseModalClickEsc();
   scroll.disabledScroll();
 
   let parent = e.srcElement;
-  while (parent.id != "film_card") {
+  while (parent.id != 'film_card') {
     parent = parent.parentElement;
   }
   getTrailer(parent.dataset.id, movieAPI);
@@ -189,7 +191,7 @@ export default function modalOpen(e) {
 
 backdrop.addEventListener('click', closeModal);
 function closeModal(e) {
-   scroll.enabledScroll();
+  scroll.enabledScroll();
   if (e.target.classList[0] !== 'backdrop') {
     return;
   }
@@ -312,8 +314,7 @@ function addOnWatch() {
   }
 }
 
-
-import throttle from 'lodash.throttle'
+import throttle from 'lodash.throttle';
 
 const scrollModal = document.querySelector('.film-modal');
 window.addEventListener('scroll', throttle(onScroll, 150));
@@ -333,4 +334,4 @@ export function toTop() {
   window.scrollTo(100, 100, 'smooth');
 }
 
-scrollModal.addEventListener('click', toTop); 
+scrollModal.addEventListener('click', toTop);
