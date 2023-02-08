@@ -39,6 +39,10 @@ if (filmsList) {
 export default function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //     return;
+  
+  if (e.target.className === "films__list" || e.target.className === "films-library__list") {
+    return;
+  }
   CloseModalClickEsc();
   scroll.disabledScroll();
 
