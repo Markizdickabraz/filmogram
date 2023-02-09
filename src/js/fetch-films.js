@@ -64,12 +64,13 @@ export default class NewAskServer {
     });
   }
 
-  async fetchMovies(request = '') {
+  async fetchMovies(request = '', page = 1) {
     this.BASEURL_MOVIES = `https://api.themoviedb.org/3/discover/movie?${this.api_key}&with_genres=`;
       try {
         const response = await axios.get(
-          `${this.BASEURL_MOVIES}${request}`
+          `${this.BASEURL_MOVIES}${request}&page=${page}`
         );
+        localStorage.setItem(this.STORAGE_PAGINATION_TYPE, 'genres');
         return response;
       } catch (error) {
         console.log(error);

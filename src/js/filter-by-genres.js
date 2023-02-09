@@ -6,6 +6,8 @@ const STORAGE_KEY = 'genresId';
 const gallery = document.querySelector('.films__list');
 const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=faab19b092cac6c59a97dec233a38f4d&`;
 
+const STORAGE_TOTAL_PAGES = 'totalPages';
+
 let selectedGenge = [];
 setGenres();
 
@@ -51,6 +53,10 @@ async function askServer(request) {
   try {
     const data = await newAskServer.fetchMovies(request);
     const result = data.data.results;
+
+    localStorage.setItem(STORAGE_TOTAL_PAGES, data.data.total_pages);
+    console.log(data.data.total_pages);
+
     // console.log(result);
     showFilteredMovies(result);
   } catch (error) {

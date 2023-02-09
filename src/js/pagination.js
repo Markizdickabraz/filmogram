@@ -25,6 +25,8 @@ async function goToPage(pageNumber) {
       await goToPageSeach(pageNumber);
     } else if (paginationType === 'rating') {
       await goToPageRating(pageNumber);
+    } else if (paginationType === 'genres') {
+
     } else {
       console.log('Unknown pagination type!');
     }
