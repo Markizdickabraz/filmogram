@@ -17,3 +17,7 @@
     display: inline-block;
     cursor: pointer;
 }
+.tag--active{
+  color: $accent-bcg-color;
+  background-color:  white;
+}
