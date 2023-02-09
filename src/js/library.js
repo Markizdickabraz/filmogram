@@ -68,15 +68,17 @@ export function renderPageWached() {
   //     return;
   //   }
   // }
-  const markupPage = parseWatched
+  const parseWatchedLimited = parseWatched.slice(0,20);
+  const markupPage = parseWatchedLimited
     .map(({ id, poster_path, title, genre_ids, release_date }) => {
       let genreArr = [];
       for (const genre of parseGenresJson) {
         if (genre_ids.includes(genre.id)) {
           genreArr.push(genre.name);
         }
-      }
-      return `<li class="films__card" data-id="${id}" id="film_card">
+      } 
+
+  return `<li class="films__card" data-id="${id}" id="film_card">
 <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='${notFound}';";"
 />
   <div class="films__desc">
