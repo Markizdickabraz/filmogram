@@ -103,8 +103,6 @@ export function renderPageWached(pageNumber = 1) {
 
   localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'wached');
   localStorage.setItem(STORAGE_TOTAL_PAGES, Math.ceil(parseWatched.length / 20));
-  let paginationReset = new Event('reset');
-  paginationRef.dispatchEvent(paginationReset);
 
   const markupPage = parseWatchedLimited
     .map(({ id, poster_path, title, genre_ids, release_date }) => {
@@ -132,7 +130,7 @@ export function renderPageWached(pageNumber = 1) {
 
   if (!markupPage) {
     console.log('Hello!');
-    Notiflix.Notify.info('Додайте Ваш перший фільм до бібліотеки!');
+    Notiflix.Notify.info('Додайте сюди Ваш перший фільм!');
   }
 
   if (libraryList) {
@@ -184,6 +182,12 @@ export function renderPageQueue(pageNumber = 1) {
             `;
     })
     .join('');
+
+    if (!markupPage) {
+      console.log('Hello!');
+      Notiflix.Notify.info('Додайте сюди Ваш перший фільм!');
+    }
+
   libraryList.innerHTML = markupPage;
 }
 
