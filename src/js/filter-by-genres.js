@@ -67,7 +67,7 @@ async function askServer(request) {
   }
 }
 
-function showFilteredMovies(result) {
+export default function showFilteredMovies(result) {
   const IMGURL = `https://image.tmdb.org/t/p/w500/`;
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);

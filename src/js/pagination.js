@@ -2,6 +2,7 @@ import NewAskServer from "./fetch-films";
 const seachServer = new NewAskServer();
 import drawGallery from "./seach.js";
 import { renderPageWached, renderPageQueue } from "./library.js";
+import showFilteredMovies from "./filter-by-genres";
 
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
@@ -50,11 +51,14 @@ async function goToPageRating(pageNumber) {
 }
 
 async function goToPageGenres(pageNumber) {
-  console.log('Yho!');
+  // console.log('Yho!');
   const request = localStorage.getItem(STORAGE_GENRES);
   console.log(request);
   const response = await seachServer.fetchMovies(request, pageNumber);
   console.log(response);
+  const result = response.data.results;
+  localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
+  drawGallery();
 }
 
 const btn1Ref = document.querySelector('[data-index="1"]');
