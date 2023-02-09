@@ -14,6 +14,15 @@ const STORAGE_PSEUDOPAGINATION_TYPE = 'pseudoPaginationType';
 localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'wached');
 
 if (queueBtn) {
+  setTimeout(() => {
+    const watchPageJson = localStorage.getItem('watched');
+    const parseWatched = JSON.parse(watchPageJson || '[]');
+    localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'wached');
+    localStorage.setItem(STORAGE_TOTAL_PAGES, Math.ceil(parseWatched.length / 20));
+    let paginationReset = new Event('reset');
+    paginationRef.dispatchEvent(paginationReset);
+  }, 0);
+
   renderPageWached();
 
   queueBtn.addEventListener('click', e => {
@@ -54,8 +63,8 @@ if (queueBtn) {
 //   return;
 // }
 
-const watchPageJson = localStorage.getItem('watched');
-const parseWatched = JSON.parse(watchPageJson);
+// const watchPageJson = localStorage.getItem('watched');
+// const parseWatched = JSON.parse(watchPageJson);
 
 export function renderPageWached(pageNumber = 1) {
   const watchPageJson = localStorage.getItem('watched');
@@ -109,7 +118,6 @@ export function renderPageWached(pageNumber = 1) {
     .join('');
 
   if (!markupPage) {
-    // Notiflix.Notify('Hello!');
     console.log('Hello!');
     Notiflix.Notify.info('Додайте Ваш перший фільм до бібліотеки!');
   }
