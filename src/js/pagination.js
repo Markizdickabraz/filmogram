@@ -10,6 +10,8 @@ const STORAGE_TOTAL_PAGES = 'totalPages';
 const STORAGE_PAGINATION_TYPE = 'paginationType';
 const STORAGE_PSEUDOPAGINATION_TYPE = 'pseudoPaginationType';
 
+const STORAGE_GENRES = 'genresList';
+
 async function goToPage(pageNumber) {
   const paginationType = localStorage.getItem(STORAGE_PAGINATION_TYPE);
   const pseudoPaginationType = localStorage.getItem(STORAGE_PSEUDOPAGINATION_TYPE);
@@ -26,7 +28,7 @@ async function goToPage(pageNumber) {
     } else if (paginationType === 'rating') {
       await goToPageRating(pageNumber);
     } else if (paginationType === 'genres') {
-
+      await goToPageGenres(pageNumber);
     } else {
       console.log('Unknown pagination type!');
     }
@@ -45,6 +47,14 @@ async function goToPageRating(pageNumber) {
   const result = response.data.results;
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
   drawGallery();
+}
+
+async function goToPageGenres(pageNumber) {
+  console.log('Yho!');
+  const request = localStorage.getItem(STORAGE_GENRES);
+  console.log(request);
+  const response = await seachServer.fetchMovies(request, pageNumber);
+  console.log(response);
 }
 
 const btn1Ref = document.querySelector('[data-index="1"]');

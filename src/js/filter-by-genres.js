@@ -7,6 +7,8 @@ const gallery = document.querySelector('.films__list');
 const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=faab19b092cac6c59a97dec233a38f4d&`;
 
 const STORAGE_TOTAL_PAGES = 'totalPages';
+const paginationRef = document.querySelector('.pagination-container');
+const STORAGE_GENRES = 'genresList';
 
 let selectedGenge = [];
 setGenres();
@@ -54,6 +56,7 @@ async function askServer(request) {
     const data = await newAskServer.fetchMovies(request);
     const result = data.data.results;
 
+    localStorage.setItem(STORAGE_GENRES, request);
     localStorage.setItem(STORAGE_TOTAL_PAGES, data.data.total_pages);
     console.log(data.data.total_pages);
 
@@ -69,7 +72,7 @@ function showFilteredMovies(result) {
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const markup = result
-    .map(({ poster_path, title, genre_ids, release_date }) => {
+    .map(({ id, poster_path, title, genre_ids, release_date }) => {
       let genreArr = [];
       for (const genre of parseGenresJson) {
         if (genre_ids.includes(genre.id)) {
@@ -78,7 +81,7 @@ function showFilteredMovies(result) {
         }
       }
       return `
-            <li class="films__card">
+            <li class="films__card" data-id="${id}" id="film_card">
   <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
   <div class="films__desc">
     <h3 class="films__title">${title}</h3>
