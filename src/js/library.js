@@ -1,4 +1,5 @@
 import modalOpen from './modal/film-modal';
+import Notiflix from 'notiflix';
 
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_KEY = 'genresId';
@@ -12,9 +13,9 @@ const STORAGE_TOTAL_PAGES = 'totalPages';
 const STORAGE_PSEUDOPAGINATION_TYPE = 'pseudoPaginationType';
 localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'wached');
 
-renderPageWached();
-
 if (queueBtn) {
+  renderPageWached();
+
   queueBtn.addEventListener('click', e => {
     // e.preventDefault();
     watchBtn.classList.remove('isActive') ||
@@ -44,13 +45,15 @@ if (queueBtn) {
 //   renderPageQueue();
 //   console.dir(queueBtn);
 // }
-function parseNull() {
-  const parseNull = `
-    <h2>Додай фільми єблан!</h2>
-    `;
-  libraryList.innerHTML = parseNull;
-  return;
-}
+
+// function parseNull() {
+//   const parseNull = `
+//     <h2>Додай фільми єблан!</h2>
+//     `;
+//   libraryList.innerHTML = parseNull;
+//   return;
+// }
+
 const watchPageJson = localStorage.getItem('watched');
 const parseWatched = JSON.parse(watchPageJson);
 
@@ -76,7 +79,6 @@ export function renderPageWached(pageNumber = 1) {
   const beginCard = (pageNumber - 1) * 20;
   const parseWatchedLimited = parseWatched.slice(beginCard, beginCard + 20);
 
-
   localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'wached');
   localStorage.setItem(STORAGE_TOTAL_PAGES, Math.ceil(parseWatched.length / 20));
   let paginationReset = new Event('reset');
@@ -90,7 +92,6 @@ export function renderPageWached(pageNumber = 1) {
           genreArr.push(genre.name);
         }
       } 
-
   return `<li class="films__card" data-id="${id}" id="film_card">
 <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='${notFound}';";"
 />
@@ -106,6 +107,13 @@ export function renderPageWached(pageNumber = 1) {
 `;
     })
     .join('');
+
+  if (!markupPage) {
+    // Notiflix.Notify('Hello!');
+    console.log('Hello!');
+    Notiflix.Notify.info('Додайте Ваш перший фільм до бібліотеки!');
+  }
+
   if (libraryList) {
     libraryList.innerHTML = markupPage;
   }
