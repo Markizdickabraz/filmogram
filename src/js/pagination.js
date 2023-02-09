@@ -10,10 +10,18 @@ const STORAGE_PAGINATION_TYPE = 'paginationType';
 
 async function goToPage(pageNumber) {
   const paginationType = localStorage.getItem(STORAGE_PAGINATION_TYPE);
+  const libraryMode = !!document.querySelector('.js-btn__queue');
+  console.log(libraryMode);
+  // console.log(paginationType);
+  // console.log(localStorage.getItem('paginationType'));
   if (paginationType === 'seach') {
     await goToPageSeach(pageNumber);
   } else if (paginationType === 'rating') {
     await goToPageRating(pageNumber);
+  } else if (paginationType === 'watched') {
+    console.log('Ololo!');
+  } else if (paginationType === 'queue') {
+
   } else {
     console.log('Unknown pagination type!');
   }
@@ -239,5 +247,12 @@ function defineResultsPerPage() {
   }
   return pageSize;
 }
+
+// const queueBtn = document.querySelector('.js-btn__queue');
+// if (queueBtn) {
+//   localStorage.setItem('paginationType', 'huita');
+//   console.log('its works!');
+//   console.log(localStorage.getItem('paginationType'));
+// }
 
 export { currentPage, defineResultsPerPage };

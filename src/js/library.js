@@ -2,6 +2,7 @@ import modalOpen from './modal/film-modal';
 
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_KEY = 'genresId';
+const STORAGE_PAGINATION_TYPE = 'paginationType';
 
 const watchBtn = document.querySelector('.js-btn__watched');
 const queueBtn = document.querySelector('.js-btn__queue');
@@ -23,6 +24,10 @@ if (queueBtn) {
       watchBtn.classList.add('isActive') ||
         queueBtn.classList.remove('isActive' || renderPageWached());
   });
+
+  // localStorage.setItem('paginationType', 'huita');
+  // console.log('its works!');
+  // console.log(localStorage.getItem('paginationType'));
 }
 
 // renderLibrary();
@@ -97,6 +102,11 @@ export function renderPageWached() {
     libraryList.innerHTML = markupPage;
   }
 }
+
+
+
+
+
 
 export function renderPageQueue() {
   const queuePageJson = localStorage.getItem('queue');
