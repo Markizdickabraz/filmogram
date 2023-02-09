@@ -1,5 +1,6 @@
 import NewAskServer from '../fetch-films';
 import { getTrailer } from '../trailer';
+import { renderPageQueue, renderPageWached, parseNull } from '../library';
 
 const scroll = {
   disabledScroll() {
@@ -10,23 +11,27 @@ const scroll = {
     left:0;
     height: 100vh;
     width: 100vw;
-    padding-right: ${window.innerWidth - document.body.offsetWidth}px`
+    padding-right: ${window.innerWidth - document.body.offsetWidth}px`;
   },
   enabledScroll() {
     document.body.style.cssText = `
     position: relative;`;
-    window.scroll({ top: scroll.scrollPosition })
-  }
-}
+    window.scroll({ top: scroll.scrollPosition });
+  },
+};
 
 const movieAPI = new NewAskServer();
 const filmsList = document.querySelector('.films__list');
 
-
 const modal = document.querySelector('.renderModal');
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_KEY = 'genresId';
-
+// const watchPage = localStorage.setItem('watched', JSON.stringify([]));
+const watchPageJson = localStorage.getItem('watched');
+const parseWatched = JSON.parse(watchPageJson);
+// const queuePage = localStorage.setItem('queue', JSON.stringify([]));
+const queuePageJson = localStorage.getItem('queue');
+const parseQueue = JSON.parse(queuePageJson || '[]');
 const backdrop = document.querySelector('.backdrop');
 const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
 
@@ -39,15 +44,18 @@ if (filmsList) {
 export default function modalOpen(e) {
   // if (e.target.className !== "films__card") {
   //     return;
-  
-  if (e.target.className === "films__list" || e.target.className === "films-library__list") {
+
+  if (
+    e.target.className === 'films__list' ||
+    e.target.className === 'films-library__list'
+  ) {
     return;
   }
   CloseModalClickEsc();
   scroll.disabledScroll();
 
   let parent = e.srcElement;
-  while (parent.id != "film_card") {
+  while (parent.id != 'film_card') {
     parent = parent.parentElement;
   }
   getTrailer(parent.dataset.id, movieAPI);
@@ -189,7 +197,7 @@ export default function modalOpen(e) {
 
 backdrop.addEventListener('click', closeModal);
 function closeModal(e) {
-   scroll.enabledScroll();
+  scroll.enabledScroll();
   if (e.target.classList[0] !== 'backdrop') {
     return;
   }
@@ -216,7 +224,7 @@ function checkQueue() {
   if (localStorage.getItem('queue') == null) {
     return;
   }
-  let currentqueue = JSON.parse(localStorage.getItem('queue'));
+  let currentqueue = JSON.parse(localStorage.getItem('queue') || []);
   let idMovie = JSON.parse(localStorage.getItem('current-film-id'));
 
   if (currentqueue.find(movie => movie.id === idMovie)) {
@@ -229,7 +237,7 @@ function checkWatch() {
   if (localStorage.getItem('watched') == null) {
     return;
   }
-  let currentwatch = JSON.parse(localStorage.getItem('watched'));
+  let currentwatch = JSON.parse(localStorage.getItem('watched') || []);
   let idMovie = JSON.parse(localStorage.getItem('current-film-id'));
 
   if (currentwatch.find(movie => movie.id === idMovie)) {
@@ -243,22 +251,15 @@ function addOnQueue() {
 
   if (btnAddToQueue.textContent.trim() === 'ADD TO QUEUE') {
     let currentList = JSON.parse(localStorage.getItem('storagePage'));
-
     let idMovie = JSON.parse(localStorage.getItem('current-film-id'));
-
     if (localStorage.getItem('queue') == null) {
       let one = currentList.filter(movie => movie.id === idMovie);
       localStorage.setItem('queue', JSON.stringify(one));
       btnAddToQueue.textContent = 'DELETE FROM QUEUE';
-
-      return;
     }
-
     let currenQueue = JSON.parse(localStorage.getItem('queue'));
-
     let selectedMovie = currentList.filter(movie => movie.id === idMovie);
     currenQueue.push(selectedMovie[0]);
-
     localStorage.setItem('queue', JSON.stringify(currenQueue));
     btnAddToQueue.textContent = 'DELETE FROM QUEUE';
   } else {
@@ -272,6 +273,7 @@ function addOnQueue() {
 
     btnAddToQueue.textContent = 'ADD TO QUEUE';
     localStorage.setItem('queue', JSON.stringify(currentList));
+    renderPageQueue();
   }
 }
 
@@ -287,7 +289,7 @@ function addOnWatch() {
       let one = currentWatch.filter(movie => movie.id === idMovie);
       localStorage.setItem('watched', JSON.stringify(one));
       btnAddToWatch.textContent = 'DELETE FROM WATCHED';
-
+      renderPageWached();
       return;
     }
 
@@ -309,11 +311,11 @@ function addOnWatch() {
 
     btnAddToWatch.textContent = 'ADD TO WATCHED';
     localStorage.setItem('watched', JSON.stringify(currentWatch));
+    renderPageWached();
   }
 }
 
-
-import throttle from 'lodash.throttle'
+import throttle from 'lodash.throttle';
 
 const scrollModal = document.querySelector('.film-modal');
 window.addEventListener('scroll', throttle(onScroll, 150));
@@ -333,4 +335,4 @@ export function toTop() {
   window.scrollTo(100, 100, 'smooth');
 }
 
-scrollModal.addEventListener('click', toTop); 
+scrollModal.addEventListener('click', toTop);

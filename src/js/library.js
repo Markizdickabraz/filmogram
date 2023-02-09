@@ -22,8 +22,8 @@ if (queueBtn) {
     if (watchBtn.classList[3] !== 'isActive')
       watchBtn.classList.add('isActive') ||
         queueBtn.classList.remove('isActive' || renderPageWached());
-  })
-};
+  });
+}
 
 // renderLibrary();
 // console.dir(watchBtn);
@@ -39,14 +39,35 @@ if (queueBtn) {
 //   renderPageQueue();
 //   console.dir(queueBtn);
 // }
+function parseNull() {
+  const parseNull = `
+    <h2>Додай фільми єблан!</h2>
+    `;
+  libraryList.innerHTML = parseNull;
+  return;
+}
+const watchPageJson = localStorage.getItem('watched');
+const parseWatched = JSON.parse(watchPageJson);
 
 export function renderPageWached() {
   const watchPageJson = localStorage.getItem('watched');
-  const parseWatched = JSON.parse(watchPageJson);
+  const parseWatched = JSON.parse(watchPageJson || '[]');
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const IMGURL = `https://image.tmdb.org/t/p/w500/`;
   const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
+  // if (parseWatched == null || []) {
+  //   parseNull();
+  // }
+  // function parseNull(e) {
+  //   if (e === null || e === []) {
+  //     const parseNull = `
+  //   <h2>Додай фільми єблан!</h2>
+  //   `;
+  //     libraryList.innerHTML = parseNull;
+  //     return;
+  //   }
+  // }
   const markupPage = parseWatched
     .map(({ id, poster_path, title, genre_ids, release_date }) => {
       let genreArr = [];
@@ -55,9 +76,7 @@ export function renderPageWached() {
           genreArr.push(genre.name);
         }
       }
-
-      return `
-            <li class="films__card" data-id="${id}" id="film_card">
+      return `<li class="films__card" data-id="${id}" id="film_card">
 <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='${notFound}';";"
 />
   <div class="films__desc">
@@ -69,20 +88,31 @@ export function renderPageWached() {
     </p>
   </div>
 </li>
-            `;
+`;
     })
     .join('');
   if (libraryList) {
     libraryList.innerHTML = markupPage;
   }
 }
+
 export function renderPageQueue() {
   const queuePageJson = localStorage.getItem('queue');
-  const parseQueue = JSON.parse(queuePageJson);
+  const parseQueue = JSON.parse(queuePageJson || '[]');
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const IMGURL = `https://image.tmdb.org/t/p/w500/`;
   const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
+  function parseNull(e) {
+    if (e === null || e === []) {
+      const parseNull = `
+    <h2>Додай фільми єблан!</h2>
+    `;
+      libraryList.innerHTML = parseNull;
+      return;
+    }
+  }
+
   const markupPage = parseQueue
     .map(({ id, poster_path, title, genre_ids, release_date }) => {
       let genreArr = [];

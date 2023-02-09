@@ -17,6 +17,7 @@ async function askServerByReting() {
     localStorage.setItem(STORAGE_TOTAL_PAGES, data.data.total_pages);
     const result = data.data.results;
     localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
+
     renderMovieRatingPage(result);
   } catch (error) {
     console.log(error.message);
