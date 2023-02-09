@@ -2,11 +2,13 @@ import modalOpen from './modal/film-modal';
 
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_KEY = 'genresId';
-const STORAGE_PAGINATION_TYPE = 'paginationType';
 
 const watchBtn = document.querySelector('.js-btn__watched');
 const queueBtn = document.querySelector('.js-btn__queue');
 const libraryList = document.querySelector('.films-library__list');
+
+const STORAGE_PSEUDOPAGINATION_TYPE = 'pseudoPaginationType';
+localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'wached');
 
 renderPageWached();
 
@@ -24,10 +26,6 @@ if (queueBtn) {
       watchBtn.classList.add('isActive') ||
         queueBtn.classList.remove('isActive' || renderPageWached());
   });
-
-  // localStorage.setItem('paginationType', 'huita');
-  // console.log('its works!');
-  // console.log(localStorage.getItem('paginationType'));
 }
 
 // renderLibrary();

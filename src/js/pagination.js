@@ -2,28 +2,43 @@
 import NewAskServer from "./fetch-films";
 const seachServer = new NewAskServer();
 import drawGallery from "./seach.js";
+
+// import renderPageWached from "./library.js";
+// console.log('fff' + renderPageWached);
+
+import { renderPageWached, renderPageQueue } from "./library.js";
+console.log(renderPageWached);
+console.log(renderPageQueue);
+
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_CURRENT_REQUEST = 'currentRequest';
 const STORAGE_TOTAL_PAGES = 'totalPages';
 const STORAGE_PAGINATION_TYPE = 'paginationType';
+const STORAGE_PSEUDOPAGINATION_TYPE = 'pseudoPaginationType';
 
 async function goToPage(pageNumber) {
   const paginationType = localStorage.getItem(STORAGE_PAGINATION_TYPE);
+  const pseudoPaginationType = localStorage.getItem(STORAGE_PSEUDOPAGINATION_TYPE);
   const libraryMode = !!document.querySelector('.js-btn__queue');
   console.log(libraryMode);
-  // console.log(paginationType);
+  console.log(pseudoPaginationType);
   // console.log(localStorage.getItem('paginationType'));
-  if (paginationType === 'seach') {
-    await goToPageSeach(pageNumber);
-  } else if (paginationType === 'rating') {
-    await goToPageRating(pageNumber);
-  } else if (paginationType === 'watched') {
-    console.log('Ololo!');
-  } else if (paginationType === 'queue') {
-
+  if (libraryMode) {
+    if (pseudoPaginationType === 'wached') {
+      console.log('wached works');
+      renderPageWached();
+    } else {
+      console.log('mmm!');
+    }
   } else {
-    console.log('Unknown pagination type!');
+    if (paginationType === 'seach') {
+      await goToPageSeach(pageNumber);
+    } else if (paginationType === 'rating') {
+      await goToPageRating(pageNumber);
+    } else {
+      console.log('Unknown pagination type!');
+    }
   }
 }
 
@@ -38,9 +53,13 @@ async function goToPageRating(pageNumber) {
   const response = await seachServer.fetchMovieRating(pageNumber);
   const result = response.data.results;
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
-  console.log(result);
+  // console.log(result);
   drawGallery();
 }
+
+// function goToPageWatched(pageNumber) {
+
+// }
 
 const btn1Ref = document.querySelector('[data-index="1"]');
 const btn2Ref = document.querySelector('[data-index="2"]');
