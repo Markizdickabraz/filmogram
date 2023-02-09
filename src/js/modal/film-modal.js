@@ -256,6 +256,8 @@ function addOnQueue() {
       let one = currentList.filter(movie => movie.id === idMovie);
       localStorage.setItem('queue', JSON.stringify(one));
       btnAddToQueue.textContent = 'DELETE FROM QUEUE';
+      renderPageQueue();
+      return;
     }
     let currenQueue = JSON.parse(localStorage.getItem('queue'));
     let selectedMovie = currentList.filter(movie => movie.id === idMovie);

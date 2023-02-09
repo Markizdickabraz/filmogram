@@ -1,21 +1,33 @@
-
 import NewAskServer from "./fetch-films";
 const seachServer = new NewAskServer();
 import drawGallery from "./seach.js";
+import { renderPageWached, renderPageQueue } from "./library.js";
+
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
 const STORAGE_CURRENT_REQUEST = 'currentRequest';
 const STORAGE_TOTAL_PAGES = 'totalPages';
 const STORAGE_PAGINATION_TYPE = 'paginationType';
+const STORAGE_PSEUDOPAGINATION_TYPE = 'pseudoPaginationType';
 
 async function goToPage(pageNumber) {
   const paginationType = localStorage.getItem(STORAGE_PAGINATION_TYPE);
-  if (paginationType === 'seach') {
-    await goToPageSeach(pageNumber);
-  } else if (paginationType === 'rating') {
-    await goToPageRating(pageNumber);
+  const pseudoPaginationType = localStorage.getItem(STORAGE_PSEUDOPAGINATION_TYPE);
+  const libraryMode = !!document.querySelector('.js-btn__queue');
+  if (libraryMode) {
+    if (pseudoPaginationType === 'wached') {
+      renderPageWached(pageNumber);
+    } else {
+      renderPageQueue(pageNumber);
+    }
   } else {
-    console.log('Unknown pagination type!');
+    if (paginationType === 'seach') {
+      await goToPageSeach(pageNumber);
+    } else if (paginationType === 'rating') {
+      await goToPageRating(pageNumber);
+    } else {
+      console.log('Unknown pagination type!');
+    }
   }
 }
 
@@ -30,7 +42,6 @@ async function goToPageRating(pageNumber) {
   const response = await seachServer.fetchMovieRating(pageNumber);
   const result = response.data.results;
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
-  console.log(result);
   drawGallery();
 }
 
@@ -239,5 +250,12 @@ function defineResultsPerPage() {
   }
   return pageSize;
 }
+
+// const queueBtn = document.querySelector('.js-btn__queue');
+// if (queueBtn) {
+//   localStorage.setItem('paginationType', 'huita');
+//   console.log('its works!');
+//   console.log(localStorage.getItem('paginationType'));
+// }
 
 export { currentPage, defineResultsPerPage };
