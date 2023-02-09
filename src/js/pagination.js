@@ -1,14 +1,7 @@
-
 import NewAskServer from "./fetch-films";
 const seachServer = new NewAskServer();
 import drawGallery from "./seach.js";
-
-// import renderPageWached from "./library.js";
-// console.log('fff' + renderPageWached);
-
 import { renderPageWached, renderPageQueue } from "./library.js";
-console.log(renderPageWached);
-console.log(renderPageQueue);
 
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
@@ -21,15 +14,11 @@ async function goToPage(pageNumber) {
   const paginationType = localStorage.getItem(STORAGE_PAGINATION_TYPE);
   const pseudoPaginationType = localStorage.getItem(STORAGE_PSEUDOPAGINATION_TYPE);
   const libraryMode = !!document.querySelector('.js-btn__queue');
-  console.log(libraryMode);
-  console.log(pseudoPaginationType);
-  // console.log(localStorage.getItem('paginationType'));
   if (libraryMode) {
     if (pseudoPaginationType === 'wached') {
-      console.log('wached works');
-      renderPageWached();
+      renderPageWached(pageNumber);
     } else {
-      console.log('mmm!');
+      renderPageQueue(pageNumber);
     }
   } else {
     if (paginationType === 'seach') {
@@ -53,13 +42,8 @@ async function goToPageRating(pageNumber) {
   const response = await seachServer.fetchMovieRating(pageNumber);
   const result = response.data.results;
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
-  // console.log(result);
   drawGallery();
 }
-
-// function goToPageWatched(pageNumber) {
-
-// }
 
 const btn1Ref = document.querySelector('[data-index="1"]');
 const btn2Ref = document.querySelector('[data-index="2"]');

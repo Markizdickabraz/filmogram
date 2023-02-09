@@ -6,7 +6,9 @@ const STORAGE_KEY = 'genresId';
 const watchBtn = document.querySelector('.js-btn__watched');
 const queueBtn = document.querySelector('.js-btn__queue');
 const libraryList = document.querySelector('.films-library__list');
+const paginationRef = document.querySelector('.pagination-container');
 
+const STORAGE_TOTAL_PAGES = 'totalPages';
 const STORAGE_PSEUDOPAGINATION_TYPE = 'pseudoPaginationType';
 localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'wached');
 
@@ -52,7 +54,7 @@ function parseNull() {
 const watchPageJson = localStorage.getItem('watched');
 const parseWatched = JSON.parse(watchPageJson);
 
-export function renderPageWached() {
+export function renderPageWached(pageNumber = 1) {
   const watchPageJson = localStorage.getItem('watched');
   const parseWatched = JSON.parse(watchPageJson || '[]');
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
@@ -71,7 +73,15 @@ export function renderPageWached() {
   //     return;
   //   }
   // }
-  const parseWatchedLimited = parseWatched.slice(0,20);
+  const beginCard = (pageNumber - 1) * 20;
+  const parseWatchedLimited = parseWatched.slice(beginCard, beginCard + 20);
+
+
+  localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'wached');
+  localStorage.setItem(STORAGE_TOTAL_PAGES, Math.ceil(parseWatched.length / 20));
+  let paginationReset = new Event('reset');
+  paginationRef.dispatchEvent(paginationReset);
+
   const markupPage = parseWatchedLimited
     .map(({ id, poster_path, title, genre_ids, release_date }) => {
       let genreArr = [];
@@ -101,29 +111,27 @@ export function renderPageWached() {
   }
 }
 
-
-
-
-
-
-export function renderPageQueue() {
+export function renderPageQueue(pageNumber = 1) {
   const queuePageJson = localStorage.getItem('queue');
   const parseQueue = JSON.parse(queuePageJson || '[]');
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);
   const IMGURL = `https://image.tmdb.org/t/p/w500/`;
   const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
-  function parseNull(e) {
-    if (e === null || e === []) {
-      const parseNull = `
-    <h2>Додай фільми єблан!</h2>
-    `;
-      libraryList.innerHTML = parseNull;
-      return;
-    }
-  }
+  // function parseNull(e) {
+  //   if (e === null || e === []) {
+  //     const parseNull = `
+  //   <h2>Додай фільми єблан!</h2>
+  //   `;
+  //     libraryList.innerHTML = parseNull;
+  //     return;
+  //   }
+  // }
 
-  const markupPage = parseQueue
+  const beginCard = (pageNumber - 1) * 20;
+  const parseQueueLimited = parseQueue.slice(beginCard, beginCard + 20);
+
+  const markupPage = parseQueueLimited
     .map(({ id, poster_path, title, genre_ids, release_date }) => {
       let genreArr = [];
       for (const genre of parseGenresJson) {
