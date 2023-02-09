@@ -64,4 +64,15 @@ export default class NewAskServer {
     });
   }
 
+  async fetchMovies(request = '') {
+    this.BASEURL_MOVIES = `https://api.themoviedb.org/3/discover/movie?${this.api_key}&with_genres=`;
+      try {
+        const response = await axios.get(
+          `${this.BASEURL_MOVIES}${request}`
+        );
+        return response;
+      } catch (error) {
+        console.log(error);
+    }
+  }
 }
