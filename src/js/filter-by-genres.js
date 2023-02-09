@@ -13,7 +13,7 @@ async function setGenres() {
   try {
     const genreData = await newAskServer.fetchGenresId();
     console.log(genreData);
-    data = JSON.stringify(genreData);
+    // data = JSON.stringify(genreData);
     genreData.forEach(genre => {
       const li = document.createElement('li');
       li.classList.add('tag');
