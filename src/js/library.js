@@ -26,12 +26,25 @@ if (queueBtn) {
   renderPageWached();
 
   queueBtn.addEventListener('click', e => {
+    const queuePageJson = localStorage.getItem('queue');
+    const parseQueue = JSON.parse(queuePageJson || '[]');
+    localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'queue');
+    localStorage.setItem(STORAGE_TOTAL_PAGES, Math.ceil(parseQueue.length / 20));
+    let paginationReset = new Event('reset');
+    paginationRef.dispatchEvent(paginationReset);
+
     // e.preventDefault();
     watchBtn.classList.remove('isActive') ||
       queueBtn.classList.add('isActive') ||
       renderPageQueue();
   });
   watchBtn.addEventListener('click', e => {
+    const watchPageJson = localStorage.getItem('watched');
+    const parseWatched = JSON.parse(watchPageJson || '[]');
+    localStorage.setItem(STORAGE_PSEUDOPAGINATION_TYPE, 'wached');
+    localStorage.setItem(STORAGE_TOTAL_PAGES, Math.ceil(parseWatched.length / 20));
+    let paginationReset = new Event('reset');
+    paginationRef.dispatchEvent(paginationReset);
     // e.preventDefault();
     renderPageWached();
     if (watchBtn.classList[3] !== 'isActive')
