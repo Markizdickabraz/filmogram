@@ -3,7 +3,7 @@ import { getDatabase, set, ref, onValue, update, remove } from "firebase/databas
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import Notiflix from 'notiflix';
 import { chooseThemeForNotiflix } from './notiflix';
-import { closeModal } from "./modal/auth-modal";
+import { closeModalA } from "./modal/auth-modal";
 
 
 const firebaseConfig = {
@@ -74,13 +74,13 @@ signInWithEmailAndPassword(auth, email, password)
             update(ref(database, 'users/' + user.uid), {
                 last_login: dt,
             });
-            closeModal();
+            closeModalA();
             authForm.reset();
             onUserLogIn();
-            Notiflix.Report.success('Hello there!', 'Welcome back to Filmoteka!', 'Nice to be Home!');
+            Notiflix.Report.success('Hello there!', 'Welcome back to Filmoteka!', 'Thanks!');
         })
         .catch((error) => {
-            Notiflix.Report.warning('Wait a second', 'User with such email already exists, unless you want to steal it 👀', 'Oops');
+            Notiflix.Report.warning('Something went wrong', 'Please, try to sign up', 'Okay');
         });
     user = auth.currentUser;
 };
@@ -103,9 +103,9 @@ export function onRegister(evt) {
                 username: username,
                 email: email
             });
-            closeModal();
+            closeModalA();
             authForm.reset();
-            Notiflix.Report.success('Nice!', 'Welcome to Filmoteka! Relax and enjoy your movies 🦥', 'Thanks!');
+            Notiflix.Report.success('Cool!', 'Welcome to Filmoteka! Enjoy your movies 😎', 'Thanks!');
         })
         .catch((error) => {
             Notiflix.Report.warning('User with such email already exists!');
@@ -117,7 +117,7 @@ if (btnLogOut) {
     btnLogOut.addEventListener('click', (e) => {
         chooseThemeForNotiflix();
         Notiflix.Confirm.show('Exit confirmation',
-            'We hope you had a good time! 💃 🕺 Confirm exit?',
+            'We hope you had a good time! Confirm exit?',
             'Yes',
             'No',
             function okCb() {
