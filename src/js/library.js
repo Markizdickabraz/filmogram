@@ -46,12 +46,14 @@ function parseNull() {
   libraryList.innerHTML = parseNull;
   return;
 }
+const watchPageJson = localStorage.getItem('watched');
+const parseWatched = JSON.parse(watchPageJson);
 
 export function renderPageWached() {
   const watchPageJson = localStorage.getItem('watched');
   const parseWatched = JSON.parse(watchPageJson || '[]');
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
-  const parseGenresJson = JSON.parse(getGenresJson || '[]');
+  const parseGenresJson = JSON.parse(getGenresJson);
   const IMGURL = `https://image.tmdb.org/t/p/w500/`;
   const notFound = `https://i.scdn.co/image/ab67616d0000b273d9495d198c584e0e64f3ad9d`;
   // if (parseWatched == null || []) {
@@ -93,10 +95,7 @@ export function renderPageWached() {
     libraryList.innerHTML = markupPage;
   }
 }
-const trrt = [];
-const queuePageJson = localStorage.getItem('queue');
-const parseQueue = JSON.parse(queuePageJson);
-console.log(typeof trrt);
+
 export function renderPageQueue() {
   const queuePageJson = localStorage.getItem('queue');
   const parseQueue = JSON.parse(queuePageJson || '[]');
