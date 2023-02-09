@@ -9,12 +9,14 @@ const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=faab19b092c
 const STORAGE_TOTAL_PAGES = 'totalPages';
 const paginationRef = document.querySelector('.pagination-container');
 const STORAGE_GENRES = 'genresList';
+// const searchFormInput = document.querySelector('.search-form__input');
 
 let selectedGenge = [];
 setGenres();
 
 async function setGenres() {
   try {
+    // searchFormInput.value = '';
     const genreData = await newAskServer.fetchGenresId();
     console.log(genreData);
     // data = JSON.stringify(genreData);
@@ -69,7 +71,7 @@ async function askServer(request) {
   }
 }
 
-export default function showFilteredMovies(result) {
+function showFilteredMovies(result) {
   const IMGURL = `https://image.tmdb.org/t/p/w500/`;
   const getGenresJson = localStorage.getItem(STORAGE_KEY);
   const parseGenresJson = JSON.parse(getGenresJson);

@@ -2,7 +2,7 @@ import NewAskServer from "./fetch-films";
 const seachServer = new NewAskServer();
 import drawGallery from "./seach.js";
 import { renderPageWached, renderPageQueue } from "./library.js";
-import showFilteredMovies from "./filter-by-genres";
+// import showFilteredMovies from "./filter-by-genres";
 
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
