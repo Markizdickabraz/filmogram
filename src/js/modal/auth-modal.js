@@ -1,4 +1,4 @@
-import { onRegister } from "../firebase";
+import { auth, onRegister } from "../firebase";
 import { onSignIn } from "../firebase";
 
 const openAuthModal = document.querySelector(".js-open");
@@ -17,18 +17,47 @@ const signUpNow = document.querySelector('.signUp_now');
 const signInNow = document.querySelector('.signIn_now');
 const authForm = document.querySelector('.auth-modal__form');
 
-openAuthModal.addEventListener("click", toggleModal);
-closeAuthModal.addEventListener("click", closeModal);
-
+openAuthModal.addEventListener("click", openModalA);
+closeAuthModal.addEventListener("click", closeModalA);
+authModal.addEventListener("click", backdropClick)
 
 function toggleModal() {
 authModal.classList.toggle("is-hidden");
 }
 
-export function closeModal() {
+function openModalA(evt) {
+    evt.preventDefault();
+    toggleModal();
+    document.addEventListener('keydown', escClick);
+    document.body.style.overflow = 'hidden';
+    closeAuthModal.addEventListener('click', closeModalA);
+    authModal.addEventListener('click', backdropClick);
+}
+export function closeModalA() {
     authModal.classList.add('is-hidden');
+    closeAuthModal.removeEventListener('click', closeModalA);
+  document.body.removeAttribute('style');
     }
 
+    function backdropClick(evt) {
+        if (evt.currentTarget === evt.target) {
+          document.body.removeAttribute('style');
+          toggleModal();
+          document.removeEventListener('keydown', escClick);
+          authModal.removeEventListener('click', backdropClick);
+        }
+      }
+
+      function escClick(evt) {
+        const ESK_KEY_CODE = 'Escape';
+        const isEscKey = evt.code == ESK_KEY_CODE;
+        if (isEscKey) {
+          toggleModal();
+          document.removeEventListener('keydown', escClick);
+          closeAuthModal.removeEventListener('click', closeModalA);
+          authModal.removeEventListener('click', backdropClick);
+        }
+      }
 signUp.addEventListener("click", openRegisterForm)
 
 function openRegisterForm(evt) {
