@@ -1,13 +1,10 @@
 import NewAskServer from './fetch-films';
-import saveInLocalStorageGenresId from './home';
 const newAskServer = new NewAskServer();
 const tags = document.getElementById('tags');
 const STORAGE_KEY = 'genresId';
 const gallery = document.querySelector('.films__list');
 const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=faab19b092cac6c59a97dec233a38f4d&`;
 
-
-saveInLocalStorageGenresId();
 
 let selectedGenge = [];
 setGenres();
@@ -39,7 +36,8 @@ async function setGenres() {
           }
         }
         console.log(selectedGenge);
-        askServer(API_URL + 'with_genres ='+selectedGenge.join(','))
+        const selectedGengeStr = selectedGenge.join(',');
+        askServer(selectedGengeStr);
       })
     //   tags.append(li);
     })
@@ -49,11 +47,11 @@ async function setGenres() {
   }
 }
 
-async function askServer() {
+async function askServer(request) {
   try {
-    const data = await newAskServer.fetchMovies();
+    const data = await newAskServer.fetchMovies(request);
     const result = data.data.results;
-    console.log(data.data.results);
+    // console.log(result);
     showFilteredMovies(result);
   } catch (error) {
     console.log(error.message);
