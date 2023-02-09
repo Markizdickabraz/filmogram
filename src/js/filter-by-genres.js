@@ -59,6 +59,8 @@ async function askServer(request) {
     localStorage.setItem(STORAGE_GENRES, request);
     localStorage.setItem(STORAGE_TOTAL_PAGES, data.data.total_pages);
     console.log(data.data.total_pages);
+    let paginationReset = new Event('reset');
+    paginationRef.dispatchEvent(paginationReset);
 
     // console.log(result);
     showFilteredMovies(result);
