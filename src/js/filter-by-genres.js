@@ -43,7 +43,7 @@ async function setGenres() {
             selectedGenge.push(genre.id);
           }
         }
-        console.log(selectedGenge);
+        // console.log(selectedGenge);
         const selectedGengeStr = selectedGenge.join(',');
         askServer(selectedGengeStr);
       });
