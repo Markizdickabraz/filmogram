@@ -3,6 +3,7 @@ import NewAskServer from './fetch-films';
 
 import drawGallery from "./seach.js";
 const STORAGE_PAGE = 'storagePage';
+const searchFormInput = document.querySelector('.search-form__input');
 
 const newAskServer = new NewAskServer();
 const tags = document.getElementById('tags');
@@ -13,7 +14,6 @@ const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=faab19b092c
 const STORAGE_TOTAL_PAGES = 'totalPages';
 const paginationRef = document.querySelector('.pagination-container');
 const STORAGE_GENRES = 'genresList';
-// const searchFormInput = document.querySelector('.search-form__input');
 
 let selectedGenge = [];
 setGenres();
@@ -28,6 +28,7 @@ async function setGenres() {
       li.innerHTML = genre.name;
       tags.append(li);
       li.addEventListener('click', () => {
+        searchFormInput.value = '';
         li.classList.toggle('tag--active')
         if (selectedGenge.length == 0) {
           selectedGenge.push(genre.id);

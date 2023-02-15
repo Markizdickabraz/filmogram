@@ -2,7 +2,6 @@ import NewAskServer from "./fetch-films";
 const seachServer = new NewAskServer();
 import drawGallery from "./seach.js";
 import { renderPageWached, renderPageQueue } from "./library.js";
-// import showFilteredMovies from "./filter-by-genres";
 
 const STORAGE_KEY = 'genresId';
 const STORAGE_PAGE = 'storagePage';
@@ -51,11 +50,8 @@ async function goToPageRating(pageNumber) {
 }
 
 async function goToPageGenres(pageNumber) {
-  // console.log('Yho!');
   const request = localStorage.getItem(STORAGE_GENRES);
-  // console.log(request);
   const response = await seachServer.fetchMovies(request, pageNumber);
-  // console.log(response);
   const result = response.data.results;
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
   drawGallery();
@@ -266,12 +262,5 @@ function defineResultsPerPage() {
   }
   return pageSize;
 }
-
-// const queueBtn = document.querySelector('.js-btn__queue');
-// if (queueBtn) {
-//   localStorage.setItem('paginationType', 'huita');
-//   console.log('its works!');
-//   console.log(localStorage.getItem('paginationType'));
-// }
 
 export { currentPage, defineResultsPerPage };

@@ -15,6 +15,7 @@ const badRequest = document.querySelector('.bad-request');
 
 if (form) {
   form.addEventListener('submit', formHandler);
+  searchFormInput.value = '';
 }
 
 async function formHandler(event) {
@@ -26,6 +27,8 @@ async function formHandler(event) {
     return;
   }
   loader.spinner.show();
+
+  resetGenreButtons();
 
   const response = await seachServer.fetchSearchId(request);
 
@@ -81,4 +84,10 @@ export default function drawGallery() {
   });
 
   gallery.innerHTML = markup;
+}
+
+function resetGenreButtons() {
+  buttonList = document.querySelectorAll('.tag');
+  console.log(buttonList);
+  buttonList.forEach(button => {button.classList.remove('tag--active')});
 }
