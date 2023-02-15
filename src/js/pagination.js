@@ -10,6 +10,8 @@ const STORAGE_TOTAL_PAGES = 'totalPages';
 const STORAGE_PAGINATION_TYPE = 'paginationType';
 const STORAGE_PSEUDOPAGINATION_TYPE = 'pseudoPaginationType';
 
+const STORAGE_GENRES = 'genresList';
+
 async function goToPage(pageNumber) {
   const paginationType = localStorage.getItem(STORAGE_PAGINATION_TYPE);
   const pseudoPaginationType = localStorage.getItem(STORAGE_PSEUDOPAGINATION_TYPE);
@@ -25,6 +27,8 @@ async function goToPage(pageNumber) {
       await goToPageSeach(pageNumber);
     } else if (paginationType === 'rating') {
       await goToPageRating(pageNumber);
+    } else if (paginationType === 'genres') {
+      await goToPageGenres(pageNumber);
     } else {
       console.log('Unknown pagination type!');
     }
@@ -40,6 +44,14 @@ async function goToPageSeach(pageNumber) {
 
 async function goToPageRating(pageNumber) {
   const response = await seachServer.fetchMovieRating(pageNumber);
+  const result = response.data.results;
+  localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
+  drawGallery();
+}
+
+async function goToPageGenres(pageNumber) {
+  const request = localStorage.getItem(STORAGE_GENRES);
+  const response = await seachServer.fetchMovies(request, pageNumber);
   const result = response.data.results;
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
   drawGallery();
@@ -250,12 +262,5 @@ function defineResultsPerPage() {
   }
   return pageSize;
 }
-
-// const queueBtn = document.querySelector('.js-btn__queue');
-// if (queueBtn) {
-//   localStorage.setItem('paginationType', 'huita');
-//   console.log('its works!');
-//   console.log(localStorage.getItem('paginationType'));
-// }
 
 export { currentPage, defineResultsPerPage };
