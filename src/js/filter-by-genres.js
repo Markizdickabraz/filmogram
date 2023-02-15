@@ -1,5 +1,9 @@
 import { on } from 'process';
 import NewAskServer from './fetch-films';
+
+import drawGallery from "./seach.js";
+const STORAGE_PAGE = 'storagePage';
+
 const newAskServer = new NewAskServer();
 const tags = document.getElementById('tags');
 const STORAGE_KEY = 'genresId';
@@ -16,10 +20,7 @@ setGenres();
 
 async function setGenres() {
   try {
-    // searchFormInput.value = '';
     const genreData = await newAskServer.fetchGenresId();
-    console.log(genreData);
-    // data = JSON.stringify(genreData);
     genreData.forEach(genre => {
       const li = document.createElement('li');
       li.classList.add('tag');
@@ -45,7 +46,6 @@ async function setGenres() {
         const selectedGengeStr = selectedGenge.join(',');
         askServer(selectedGengeStr);
       });
-      //   tags.append(li);
     });
   } catch (error) {
     console.log(error);
@@ -60,44 +60,49 @@ async function askServer(request) {
 
     localStorage.setItem(STORAGE_GENRES, request);
     localStorage.setItem(STORAGE_TOTAL_PAGES, data.data.total_pages);
-    console.log(data.data.total_pages);
+
     let paginationReset = new Event('reset');
     paginationRef.dispatchEvent(paginationReset);
 
-    // console.log(result);
     showFilteredMovies(result);
+
   } catch (error) {
     console.log(error.message);
   }
 }
 
 function showFilteredMovies(result) {
-  const IMGURL = `https://image.tmdb.org/t/p/w500/`;
-  const getGenresJson = localStorage.getItem(STORAGE_KEY);
-  const parseGenresJson = JSON.parse(getGenresJson);
-  const markup = result
-    .map(({ id, poster_path, title, genre_ids, release_date }) => {
-      let genreArr = [];
-      for (const genre of parseGenresJson) {
-        if (genre_ids.includes(genre.id)) {
-          genreArr.push(genre.name);
-          // console.log(genreArr)
-        }
-      }
-      return `
-            <li class="films__card" data-id="${id}" id="film_card">
-  <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
-  <div class="films__desc">
-    <h3 class="films__title">${title}</h3>
-    <p class="films__genre">
-    ${genreArr.slice(0, 2).join(', ')}
-      <span>|</span>
-      ${release_date.slice(0, 4)}
-    </p>
-  </div>
-</li>
-            `;
-    })
-    .join('');
-  gallery.innerHTML = markup;
+//   const IMGURL = `https://image.tmdb.org/t/p/w500/`;
+//   const getGenresJson = localStorage.getItem(STORAGE_KEY);
+//   const parseGenresJson = JSON.parse(getGenresJson);
+//   const markup = result
+//     .map(({ id, poster_path, title, genre_ids, release_date }) => {
+//       let genreArr = [];
+//       for (const genre of parseGenresJson) {
+//         if (genre_ids.includes(genre.id)) {
+//           genreArr.push(genre.name);
+//           // console.log(genreArr)
+//         }
+//       }
+//       return `
+//             <li class="films__card" data-id="${id}" id="film_card">
+//   <img class="films__img" src="${IMGURL}${poster_path}" alt="${title}" loading="lazy" />
+//   <div class="films__desc">
+//     <h3 class="films__title">${title}</h3>
+//     <p class="films__genre">
+//     ${genreArr.slice(0, 2).join(', ')}
+//       <span>|</span>
+//       ${release_date.slice(0, 4)}
+//     </p>
+//   </div>
+// </li>
+//             `;
+//     })
+//     .join('');
+//   gallery.innerHTML = markup;
+
+  // new wersion of render (lol)
+  localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
+  drawGallery();
 }
+

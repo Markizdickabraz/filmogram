@@ -53,9 +53,9 @@ async function goToPageRating(pageNumber) {
 async function goToPageGenres(pageNumber) {
   // console.log('Yho!');
   const request = localStorage.getItem(STORAGE_GENRES);
-  console.log(request);
+  // console.log(request);
   const response = await seachServer.fetchMovies(request, pageNumber);
-  console.log(response);
+  // console.log(response);
   const result = response.data.results;
   localStorage.setItem(STORAGE_PAGE, JSON.stringify(result));
   drawGallery();
