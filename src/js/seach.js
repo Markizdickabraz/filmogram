@@ -90,3 +90,4 @@ function resetGenreButtons() {
   buttonList = document.querySelectorAll('.tag');
   buttonList.forEach(button => {button.classList.remove('tag--active')});
 }
+
