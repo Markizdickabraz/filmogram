@@ -87,7 +87,8 @@ export default function drawGallery() {
 }
 
 function resetGenreButtons() {
-  buttonList = document.querySelectorAll('.tag');
-  buttonList.forEach(button => {button.classList.remove('tag--active')});
+  const buttonList = document.querySelectorAll('.tag');
+  
+ buttonList.forEach(button => {button.classList.remove('tag--active')});
 }
 
